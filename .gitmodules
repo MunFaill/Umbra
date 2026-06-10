@@ -1,0 +1,6 @@
+[submodule "Vendor/glfw"]
+	path = Vendor/glfw
+	url = https://github.com/glfw/glfw.git
+[submodule "Vendor/premake-core"]
+	path = Vendor/premake-core
+	url = https://github.com/premake/premake-core.git
