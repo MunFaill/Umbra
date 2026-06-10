@@ -1,0 +1,6 @@
+[Bb]uild
+.vscode
+.zed
+
+*.ninja
+compile_commands.*
