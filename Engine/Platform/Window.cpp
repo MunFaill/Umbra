@@ -18,10 +18,6 @@ namespace Engine {
         glfwDestroyWindow(m_WindowHandle);
     }
 
-    void Window::MakeContextCurrent() {
-        glfwMakeContextCurrent(m_WindowHandle);
-    }
-
     void Window::HandleUpdate() {
         glfwSwapBuffers(m_WindowHandle);
         glfwPollEvents();

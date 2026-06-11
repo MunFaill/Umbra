@@ -16,7 +16,6 @@ namespace Engine {
             Window(WindowProps props = {"Umbra", 1360, 769});
             ~Window();
 
-            void MakeContextCurrent();
             void HandleUpdate();
             bool ShouldClose();
             inline WindowProps GetProps() {return m_WindowProps;}

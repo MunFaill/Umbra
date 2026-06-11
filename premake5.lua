@@ -14,7 +14,7 @@ project "Engine"
 
     libdirs {"Vendor/glfw/build/src"}
 
-    links {"glfw3"}
+    links {"glfw3", "GL", "pthread", "dl"}
     
     filter "configurations:Debug"
 		defines "Debug"

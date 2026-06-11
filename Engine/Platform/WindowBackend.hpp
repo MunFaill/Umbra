@@ -8,7 +8,17 @@
 namespace Engine {
     class WindowBackend {
         public:
-            static void Init() {if(!glfwInit()){std::print("Error: Unable to initialize GLFW API\n");} else {std::print("GLFW API initialized\n");}}
-            static void Shutdown() {glfwTerminate(); std::print("GLFW API shutdown\n");}
+            inline static void Init() {
+                if(!glfwInit()) {
+                    std::print("Error: Unable to initialize GLFW API\n");
+                } else {
+                    std::print("GLFW API initialized\n");
+                }
+            }
+
+            inline static void Shutdown() {
+                glfwTerminate();
+                std::print("GLFW API shutdown\n");
+            }
     };
 }
