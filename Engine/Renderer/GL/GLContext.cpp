@@ -1,4 +1,5 @@
 #include "Renderer/GL/GLContext.hpp"
+#include "Tools/Event.hpp"
 
 #include <print>
 #define GLAD_GL_IMPLEMENTATION
@@ -6,6 +7,12 @@
 #include <GLFW/glfw3.h>
 
 namespace Engine {
+
+    void FrameBufferSizeCallback(GLFWwindow* window, int width, int height) {
+        glViewport(0, 0, width, height);
+        Events::OnWindowResize.Invoke(width, height);
+    }
+
     GLContext::GLContext() {
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
@@ -20,6 +27,7 @@ namespace Engine {
     void GLContext::Init(GLFWwindow* Handle) {
         glfwMakeContextCurrent(Handle);
         gladLoadGL(glfwGetProcAddress);
+        glfwSetFramebufferSizeCallback(Handle, FrameBufferSizeCallback);
         std::print("GL context created\n");
     }
 

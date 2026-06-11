@@ -1,6 +1,7 @@
 #include "Platform/Window.hpp"
-#include <print>
+#include "Tools/Event.hpp"
 
+#include <print>
 #include <GLFW/glfw3.h>
 
 namespace Engine {
@@ -15,6 +16,7 @@ namespace Engine {
 
     Window::~Window() {
         std::print("Window shutdown\n");
+        Events::OnWindowResize.RemoveAllListeners();
         glfwDestroyWindow(m_WindowHandle);
     }
 
