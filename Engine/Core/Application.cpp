@@ -23,7 +23,7 @@ namespace Engine {
     }
 
     void Application::Run() {
-        m_Window->MakeContextCurrent();
+        m_Window->MakeContextCurrent(); // Remove this later, the renderer will decide this
         Time::InitTime();
         std::print("Application running\n");
         while (!m_Window->ShouldClose()) {
