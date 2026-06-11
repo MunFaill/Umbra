@@ -6,11 +6,14 @@ if [[ "$pyn" == "Y" || "$pyn" == "y" ]]; then
 	Vendor/premake-core/Bootstrap.sh
 fi
 
-read -r -p "Gen compile commands? (y/N): " ccyn
+read -r -p "Generate compile commands? (y/N): " ccyn
 
 if [[ "$ccyn" == "Y" || "$ccyn" == "y" ]]; then
 	Vendor/premake-core/bin/release/premake5 compilecommands
 fi
+
+cmake -S Vendor/glfw -B Vendor/glfw/build
+make -C Vendor/glfw/build -j$(nproc)
 
 Vendor/premake-core/bin/release/premake5 ninja
 ninja -j$(nproc)

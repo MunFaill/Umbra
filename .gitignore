@@ -1,6 +1,10 @@
 [Bb]uild
 .vscode
 .zed
+.cache
 
 *.ninja
+.ninja_deps
+.ninja_log
+*ninja
 compile_commands.*

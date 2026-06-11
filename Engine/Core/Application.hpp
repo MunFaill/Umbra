@@ -1,5 +1,8 @@
 #pragma once
 
+#include "Platform/Window.hpp"
+#include <memory>
+
 namespace Engine {
     class Application {
         public:
@@ -10,5 +13,7 @@ namespace Engine {
 
             virtual void OnInit();
             virtual void OnUpdate(float delta);
+        private:
+            std::unique_ptr<Window> m_Window;
     };
 }

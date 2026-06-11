@@ -4,16 +4,38 @@ workspace "Umbra"
 project "Engine"
     kind "SharedLib"
     language "C++"
-    targetdir "build/bin/%{cfg.buildcfg}"
+    cppdialect "C++latest"
+    targetdir "build/lib/%{cfg.buildcfg}"
     objdir "build/obj/"
 
     files {"Engine/**.hpp", "Engine/**.cpp"}
 
+    includedirs {"Engine/", "Vendor/glfw/include/"}
+
+    libdirs {"Vendor/glfw/build/src"}
+
+    links {"glfw3"}
+    
+    filter "configurations:Debug"
+		defines "Debug"
+		symbols "on"
+    
+    filter "configurations:Release"
+		defines "Release"
+		optimize "on"
+
+project "Runtime"
+    kind "ConsoleApp"
+    language "C++"
+    cppdialect "C++latest"
+    targetdir "build/bin/%{cfg.buildcfg}"
+    objdir "build/obj/runtime/"
+
+    files {"Runtime/**.hpp", "Runtime/**.cpp"}
+
     includedirs {"Engine/"}
 
-    libdirs {}
-
-    links {}
+    links {"Engine"}
     
     filter "configurations:Debug"
 		defines "Debug"
