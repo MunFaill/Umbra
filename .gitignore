@@ -4,7 +4,6 @@
 .cache
 
 *.ninja
-.ninja_deps
-.ninja_log
+.ninja*
 *ninja
 compile_commands.*

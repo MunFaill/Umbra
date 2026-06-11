@@ -1,6 +1,7 @@
 #include "Core/Application.hpp"
 #include "Platform/WindowBackend.hpp"
 #include "Math/Time.hpp"
+#include "Tools/Event.hpp"
 
 #include <print>
 
@@ -9,6 +10,7 @@ namespace Engine {
         WindowBackend::Init();
         m_Window = std::make_unique<Window>();
         OnInit();
+        Events::OnInit.Invoke();
         std::print("Application initialized\n");
     }
 
@@ -16,6 +18,8 @@ namespace Engine {
         std::print("Application shutdown\n");
         m_Window.reset();
         WindowBackend::Shutdown();
+        Events::OnInit.RemoveAllListeners();
+        Events::OnUpdate.RemoveAllListeners();
     }
 
     void Application::Run() {
@@ -24,6 +28,7 @@ namespace Engine {
         std::print("Application running\n");
         while (!m_Window->ShouldClose()) {
             Time::CalculateTime();
+            Events::OnUpdate.Invoke(Time::DeltaTime);
             OnUpdate(Time::DeltaTime);
             m_Window->HandleUpdate();
         }
