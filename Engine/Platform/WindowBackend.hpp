@@ -10,15 +10,15 @@ namespace Engine {
         public:
             inline static void Init() {
                 if(!glfwInit()) {
-                    std::print("Error: Unable to initialize GLFW API\n");
+                    std::println("Error: Unable to initialize GLFW API");
                 } else {
-                    std::print("GLFW API initialized\n");
+                    std::println("GLFW API initialized");
                 }
             }
 
             inline static void Shutdown() {
                 glfwTerminate();
-                std::print("GLFW API shutdown\n");
+                std::println("GLFW API shutdown");
             }
     };
 }

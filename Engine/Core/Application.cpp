@@ -13,11 +13,11 @@ namespace Engine {
         m_RendererContext->Init(m_Window->GetHandle());
         OnInit();
         Events::OnInit.Invoke();
-        std::print("Application initialized\n");
+        std::println("Application initialized");
     }
 
     Application::~Application() {
-        std::print("Application shutdown\n");
+        std::println("Application shutdown");
         m_RendererContext.reset();
         m_Window.reset();
         WindowBackend::Shutdown();
@@ -27,7 +27,7 @@ namespace Engine {
 
     void Application::Run() {
         Time::InitTime();
-        std::print("Application running\n");
+        std::println("Application running");
         while (!m_Window->ShouldClose()) {
             Time::CalculateTime();
             Events::OnUpdate.Invoke(Time::DeltaTime);

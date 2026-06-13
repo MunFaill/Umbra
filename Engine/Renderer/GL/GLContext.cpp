@@ -17,18 +17,18 @@ namespace Engine {
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-        std::print("GLFW context created\n");
+        std::println("GLFW context created");
     }
 
     GLContext::~GLContext() {
-        std::print("GL context shutdown\n");
+        std::println("GL context shutdown");
     }
 
     void GLContext::Init(GLFWwindow* Handle) {
         glfwMakeContextCurrent(Handle);
         gladLoadGL(glfwGetProcAddress);
         glfwSetFramebufferSizeCallback(Handle, FrameBufferSizeCallback);
-        std::print("GL context created\n");
+        std::println("GL context created");
     }
 
     void GLContext::ClearColor(float r, float g, float b, float a) {

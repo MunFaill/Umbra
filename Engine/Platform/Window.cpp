@@ -8,14 +8,14 @@ namespace Engine {
     Window::Window(WindowProps props) : m_WindowProps(props) {
         m_WindowHandle = glfwCreateWindow(props.Width, props.Height, props.WindowTitle.c_str(), nullptr, nullptr);
         if (!m_WindowHandle) {
-            std::print("Unable to create a GLFW window!\n");
+            std::println("Unable to create a GLFW window!");
         } else {
-            std::print("Window initialized\n");
+            std::println("Window initialized");
         }
     }
 
     Window::~Window() {
-        std::print("Window shutdown\n");
+        std::println("Window shutdown\n");
         Events::OnWindowResize.RemoveAllListeners();
         glfwDestroyWindow(m_WindowHandle);
     }
