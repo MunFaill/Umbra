@@ -17,6 +17,5 @@ namespace Engine {
             virtual void OnUpdate(float delta);
         private:
             std::unique_ptr<Window> m_Window;
-            std::unique_ptr<RendererContext> m_RendererContext;
     };
 }

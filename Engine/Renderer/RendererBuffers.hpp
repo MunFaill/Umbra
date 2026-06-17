@@ -30,6 +30,6 @@ namespace Engine {
             virtual void Bind() = 0;
             virtual void Unbind() = 0;
 
-            static std::unique_ptr<FrameBuffer> Create(); // May add parameters
+            static std::unique_ptr<FrameBuffer> Create();
     };
 }

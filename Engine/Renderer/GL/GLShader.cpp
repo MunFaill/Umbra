@@ -1,6 +1,5 @@
 #include "Renderer/GL/GLShader.hpp"
 
-#define GLAD_GL_IMPLEMENTATION
 #include <glad/gl.h>
 #include <print>
 #include <fstream>

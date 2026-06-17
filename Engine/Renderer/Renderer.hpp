@@ -1,0 +1,26 @@
+#pragma once
+
+#include "Renderer/RendererBuffers.hpp"
+#include "Renderer/RendererContext.hpp"
+#include "Renderer/RendererMesh.hpp"
+#include "Renderer/RendererShader.hpp"
+
+#include <memory>
+
+class GLFWwindow;
+
+namespace Engine {
+    class Renderer {
+        public:
+            static void Init(GLFWwindow* Handle);
+            static void Draw();
+            static void Shutdown();
+
+        private:
+            inline static std::unique_ptr<RendererContext> m_Context;
+            inline static std::unique_ptr<VertexBuffer> m_Vertex;
+            inline static std::unique_ptr<IndexBuffer> m_Index;
+            inline static std::unique_ptr<Shader> m_Shader;
+            inline static std::unique_ptr<Mesh> m_Mesh;
+    };
+}

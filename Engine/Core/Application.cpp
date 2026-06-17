@@ -3,14 +3,15 @@
 #include "Math/Time.hpp"
 #include "Tools/Event.hpp"
 
+#include "Renderer/Renderer.hpp"
+
 #include <print>
 
 namespace Engine {
     Application::Application() {
         WindowBackend::Init();
-        m_RendererContext = RendererContext::Create();
         m_Window = std::make_unique<Window>();
-        m_RendererContext->Init(m_Window->GetHandle());
+        Renderer::Init(m_Window->GetHandle());
         OnInit();
         Events::OnInit.Invoke();
         std::println("Application initialized");
@@ -18,7 +19,7 @@ namespace Engine {
 
     Application::~Application() {
         std::println("Application shutdown");
-        m_RendererContext.reset();
+        Renderer::Shutdown();
         m_Window.reset();
         WindowBackend::Shutdown();
         Events::OnInit.RemoveAllListeners();
@@ -32,8 +33,7 @@ namespace Engine {
             Time::CalculateTime();
             Events::OnUpdate.Invoke(Time::DeltaTime);
             OnUpdate(Time::DeltaTime);
-            m_RendererContext->ClearColor(0.2f, 0.2f, 0.2f, 1.0f);
-            m_RendererContext->Clear();
+            Renderer::Draw();
             m_Window->HandleUpdate();
         }
     }

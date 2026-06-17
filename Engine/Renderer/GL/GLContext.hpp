@@ -10,6 +10,7 @@ namespace Engine {
             ~GLContext() override;
             void Init(GLFWwindow* Handle) override;
             void ClearColor(float r, float g, float b, float a) override;
+            void DrawInstancied(unsigned int Size) override;
             void Clear() override;
     };
 }

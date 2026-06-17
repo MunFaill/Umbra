@@ -35,6 +35,10 @@ namespace Engine {
         glClearColor(r, g, b, a);
     }
 
+    void GLContext::DrawInstancied(unsigned int Size) {
+        glDrawElements(GL_TRIANGLES, Size, GL_UNSIGNED_INT, 0);
+    }
+
     void GLContext::Clear() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
