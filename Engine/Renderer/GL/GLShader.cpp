@@ -23,10 +23,32 @@ namespace Engine{
         glCompileShader(m_VertexShader);
         glCompileShader(m_FragmentShader);
 
+        // Compile-time errors
+        int success;
+        char InfoLog[512];
+
+        glGetShaderiv(m_VertexShader, GL_COMPILE_STATUS, &success);
+        if (!success) {
+            glGetShaderInfoLog(m_VertexShader, 512, nullptr, InfoLog);
+            std::println("Error: Vertex shader compilation failed: {}", InfoLog);
+        }
+
+        glGetShaderiv(m_FragmentShader, GL_COMPILE_STATUS, &success);
+        if (!success) {
+            glGetShaderInfoLog(m_FragmentShader, 512, nullptr, InfoLog);
+            std::println("Error: Fragment shader compilation failed: {}", InfoLog);
+        }
+
         m_ShaderProgram = glCreateProgram();
         glAttachShader(m_ShaderProgram, m_VertexShader);
         glAttachShader(m_ShaderProgram, m_FragmentShader);
         glLinkProgram(m_ShaderProgram);
+
+        glGetProgramiv(m_ShaderProgram, GL_LINK_STATUS, &success);
+        if (!success) {
+            glGetProgramInfoLog(m_ShaderProgram, 512, nullptr, InfoLog);
+            std::println("Error: Shader program couldn't link successfully");
+        }
 
         std::println("Shaders files compiled and linked");
     }
