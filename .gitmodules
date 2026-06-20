@@ -4,6 +4,3 @@
 [submodule "Vendor/premake-core"]
 	path = Vendor/premake-core
 	url = https://github.com/premake/premake-core.git
-[submodule "Vendor/flecs"]
-	path = Vendor/flecs
-	url = https://github.com/SanderMertens/flecs.git
