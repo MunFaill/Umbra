@@ -10,11 +10,11 @@ project "Engine"
 
     files {"Engine/**.hpp", "Engine/**.cpp"}
 
-    includedirs {"Engine/", "Vendor/glfw/include/", "Vendor/GLAD/include"}
+    includedirs {"Engine/", "Vendor/glfw/include/", "Vendor/GLAD/include", "Vendor/flecs/include"}
 
-    libdirs {"Vendor/glfw/build/src"}
+    libdirs {"Vendor/glfw/build/src", "Vendor/flecs/build"}
 
-    links {"glfw3", "GL", "pthread", "dl"}
+    links {"glfw3", "GL", "pthread", "dl", "m", "flecs_static"} -- NOTE: Change to flecs if an error occur
     
     filter "configurations:Debug"
 		defines "Debug"

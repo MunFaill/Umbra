@@ -15,7 +15,7 @@ namespace Engine {
     }
 
     Window::~Window() {
-        std::println("Window shutdown\n");
+        std::println("Window shutdown");
         Events::OnWindowResize.RemoveAllListeners();
         glfwDestroyWindow(m_WindowHandle);
     }
