@@ -10,7 +10,7 @@ project "Engine"
 
     files {"Engine/**.hpp", "Engine/**.cpp"}
 
-    includedirs {"Engine/", "Vendor/glfw/include/", "Vendor/GLAD/include"}
+    includedirs {"Engine/", "Vendor/glfw/include/", "Vendor/GLAD/include", "Vendor/glm/glm"}
 
     libdirs {"Vendor/glfw/build/src"}
 
