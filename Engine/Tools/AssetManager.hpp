@@ -6,6 +6,10 @@
 #include <cassert>
 #include <utility>
 
+#include "Renderer/RendererMesh.hpp"
+#include "Renderer/RendererShader.hpp"
+#include "Renderer/RendererTexture.hpp"
+
 namespace Engine {
     template <typename T>
     class AssetManager {
@@ -49,5 +53,11 @@ namespace Engine {
 
         private:
             std::unordered_map<std::string, std::unique_ptr<T>> m_Assets;
+    };
+
+    struct Assets {
+        inline static AssetManager<Mesh> MeshManager;
+        inline static AssetManager<Shader> ShaderManager;
+        inline static AssetManager<Texture> TextureManager;
     };
 }
