@@ -20,7 +20,7 @@ namespace Engine {
         m_Vertex = VertexBuffer::Create(g_Vertices, sizeof(g_Vertices));
         m_Index = IndexBuffer::Create(g_Indices, sizeof(g_Indices));
 
-        m_Shader = Shader::Create("Vertex.glsl", "Fragment.glsl");
+        m_Shader = Shader::Create("Engine/Assets/Vertex.glsl", "Engine/Assets/Fragment.glsl");
 
         m_Mesh = Mesh::Create(std::move(m_Vertex), std::move(m_Index));
     }
