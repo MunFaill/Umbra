@@ -10,7 +10,7 @@ project "Engine"
 
     files {"Engine/**.hpp", "Engine/**.cpp"}
 
-    includedirs {"Engine/", "Vendor/glfw/include/", "Vendor/GLAD/include", "Vendor/glm/glm"}
+    includedirs {"Engine/", "Vendor/glfw/include/", "Vendor/GLAD/include", "Vendor/glm", "Vendor/STB"}
 
     libdirs {"Vendor/glfw/build/src"}
 
@@ -33,7 +33,7 @@ project "Runtime"
 
     files {"Runtime/**.hpp", "Runtime/**.cpp"}
 
-    includedirs {"Engine/"}
+    includedirs {"Engine/", "Vendor/glm"}
 
     links {"Engine"}
     

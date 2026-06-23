@@ -11,7 +11,8 @@ namespace Engine {
     Application::Application() {
         WindowBackend::Init();
         m_Window = std::make_unique<Window>();
-        Renderer::Init(m_Window->GetHandle());
+        auto props = m_Window->GetProps();
+        Renderer::Init(m_Window->GetHandle(), static_cast<float>(props.Width), static_cast<float>(props.Height));
         OnInit();
         Events::OnInit.Invoke();
         std::println("Application initialized");
@@ -33,7 +34,10 @@ namespace Engine {
             Time::CalculateTime();
             Events::OnUpdate.Invoke(Time::DeltaTime);
             OnUpdate(Time::DeltaTime);
-            Renderer::Draw();
+            if (m_SceneRoot) {
+                m_SceneRoot->Update(Time::DeltaTime);
+            }
+            Renderer::Draw(m_SceneRoot.get());
             m_Window->HandleUpdate();
         }
     }

@@ -1,6 +1,7 @@
 #include "Renderer/GL/GLShader.hpp"
 
 #include <glad/gl.h>
+#include <glm/gtc/type_ptr.hpp>
 #include <print>
 #include <fstream>
 #include <sstream>
@@ -68,6 +69,22 @@ namespace Engine{
     void GLShader::Unbind() {
         glUseProgram(0);
         std::println("Shader program unbinded");
+    }
+
+    void GLShader::SetInt(const std::string& Name, int Value) {
+        glUniform1i(glGetUniformLocation(m_ShaderProgram, Name.c_str()), Value);
+    }
+
+    void GLShader::SetFloat(const std::string& Name, float Value) {
+        glUniform1f(glGetUniformLocation(m_ShaderProgram, Name.c_str()), Value);
+    }
+
+    void GLShader::SetVec3(const std::string& Name, const glm::vec3& Value) {
+        glUniform3fv(glGetUniformLocation(m_ShaderProgram, Name.c_str()), 1, glm::value_ptr(Value));
+    }
+
+    void GLShader::SetMat4(const std::string& Name, const glm::mat4& Value) {
+        glUniformMatrix4fv(glGetUniformLocation(m_ShaderProgram, Name.c_str()), 1, GL_FALSE, glm::value_ptr(Value));
     }
 
     std::string GLShader::ReadFile(std::string FilePath) {
