@@ -2,13 +2,11 @@
 #include "Renderer/RendererBuffers.hpp"
 #include "Renderer/RendererShader.hpp"
 #include "Renderer/RendererMesh.hpp"
-#include "Renderer/RendererTexture.hpp"
 
 #include "Renderer/GL/GLContext.hpp"
 #include "Renderer/GL/GLBuffers.hpp"
 #include "Renderer/GL/GLShader.hpp"
 #include "Renderer/GL/GLMesh.hpp"
-#include "Renderer/GL/GLTexture.hpp"
 
 #include <memory>
 
@@ -71,6 +69,7 @@ namespace Engine {
         return nullptr;
     }
 
+    // Shader
     std::unique_ptr<Shader> Shader::Create(std::string VertexShaderPath, std::string FragmentShaderPath) {
         switch (g_GraphicsAPI) {
             case GraphicsAPI::None:
@@ -83,36 +82,13 @@ namespace Engine {
         return nullptr;
     }
 
+    // Mesh
     std::unique_ptr<Mesh> Mesh::Create(std::unique_ptr<VertexBuffer> Vertices, std::unique_ptr<IndexBuffer> Indices) {
         switch (g_GraphicsAPI) {
             case GraphicsAPI::None:
                 return nullptr;
             case GraphicsAPI::OpenGL:
                 return std::make_unique<GLMesh>(std::move(Vertices), std::move(Indices));
-            case GraphicsAPI::Vulkan:
-                return nullptr;
-        }
-        return nullptr;
-    }
-
-    std::unique_ptr<Texture> Texture::Create(const std::string& Path) {
-        switch (g_GraphicsAPI) {
-            case GraphicsAPI::None:
-                return nullptr;
-            case GraphicsAPI::OpenGL:
-                return std::make_unique<GLTexture>(Path);
-            case GraphicsAPI::Vulkan:
-                return nullptr;
-        }
-        return nullptr;
-    }
-
-    std::unique_ptr<Texture> Texture::Create(unsigned int Width, unsigned int Height, unsigned char* Data) {
-        switch (g_GraphicsAPI) {
-            case GraphicsAPI::None:
-                return nullptr;
-            case GraphicsAPI::OpenGL:
-                return std::make_unique<GLTexture>(Width, Height, Data);
             case GraphicsAPI::Vulkan:
                 return nullptr;
         }

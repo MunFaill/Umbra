@@ -1,8 +1,8 @@
 #include "Renderer/GL/GLShader.hpp"
+#include "Tools/Log.hpp"
 
 #include <glad/gl.h>
 #include <glm/gtc/type_ptr.hpp>
-#include <print>
 #include <fstream>
 #include <sstream>
 
@@ -30,13 +30,13 @@ namespace Engine{
         glGetShaderiv(m_VertexShader, GL_COMPILE_STATUS, &success);
         if (!success) {
             glGetShaderInfoLog(m_VertexShader, 512, nullptr, InfoLog);
-            std::println("Error: Vertex shader compilation failed: {}", InfoLog);
+            Print("Error: Vertex shader compilation failed: {}", InfoLog);
         }
 
         glGetShaderiv(m_FragmentShader, GL_COMPILE_STATUS, &success);
         if (!success) {
             glGetShaderInfoLog(m_FragmentShader, 512, nullptr, InfoLog);
-            std::println("Error: Fragment shader compilation failed: {}", InfoLog);
+            Print("Error: Fragment shader compilation failed: {}", InfoLog);
         }
 
         m_ShaderProgram = glCreateProgram();
@@ -47,10 +47,10 @@ namespace Engine{
         glGetProgramiv(m_ShaderProgram, GL_LINK_STATUS, &success);
         if (!success) {
             glGetProgramInfoLog(m_ShaderProgram, 512, nullptr, InfoLog);
-            std::println("Error: Shader program couldn't link successfully");
+            Print("Error: Shader program couldn't link successfully");
         }
 
-        std::println("Shaders files compiled and linked");
+        Print("Shaders files compiled and linked");
     }
 
     GLShader::~GLShader() {
@@ -58,17 +58,17 @@ namespace Engine{
         glDeleteShader(m_VertexShader);
         glDeleteShader(m_FragmentShader);
 
-        std::println("Shaders and Program deleted");
+        Print("Shaders and Program deleted");
     }
 
     void GLShader::Bind() {
         glUseProgram(m_ShaderProgram);
-        std::println("Shader program binded");
+        Print("Shader program binded");
     }
 
     void GLShader::Unbind() {
         glUseProgram(0);
-        std::println("Shader program unbinded");
+        Print("Shader program unbinded");
     }
 
     void GLShader::SetInt(const std::string& Name, int Value) {
@@ -91,13 +91,13 @@ namespace Engine{
         std::ifstream file(FilePath);
 
         if (!file.is_open()) {
-            std::println("Unable to open file: {}", FilePath);
+            Print("Unable to open file: {}", FilePath);
         }
 
         std::stringstream buffer;
         buffer << file.rdbuf();
 
-        std::println("File readed successfully: {}", FilePath);
+        Print("File readed successfully: {}", FilePath);
         return buffer.str();
     }
 }

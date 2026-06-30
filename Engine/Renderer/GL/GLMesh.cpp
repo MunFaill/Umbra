@@ -1,8 +1,8 @@
 #include "Renderer/GL/GLMesh.hpp"
 #include "Renderer/RendererBuffers.hpp"
+#include "Tools/Log.hpp"
 
 #include <glad/gl.h>
-#include <print>
 #include <utility>
 
 namespace Engine {
@@ -26,21 +26,21 @@ namespace Engine {
             m_Indices->Unbind();
         }
 
-        std::println("Mesh created successfully");
+        Print("Mesh created successfully");
     }
 
     GLMesh::~GLMesh() {
         glDeleteVertexArrays(1, &m_VAO);
-        std::println("Mesh deleted");
+        Print("Mesh deleted");
     }
 
     void GLMesh::Bind() {
         glBindVertexArray(m_VAO);
-        std::println("Mesh binded");
+        Print("Mesh binded");
     }
 
     void GLMesh::Unbind() {
         glBindVertexArray(0);
-        std::println("Mesh unbinded");
+        Print("Mesh unbinded");
     }
 }

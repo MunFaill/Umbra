@@ -1,7 +1,7 @@
 #include "Renderer/GL/GLContext.hpp"
 #include "Tools/Event.hpp"
+#include "Tools/Log.hpp"
 
-#include <print>
 #define GLAD_GL_IMPLEMENTATION
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
@@ -13,22 +13,26 @@ namespace Engine {
         Events::OnWindowResize.Invoke(width, height);
     }
 
-    GLContext::GLContext() {
+    GLContext::GLContext() { // Initialize GL context, using OpenGL 4.6 Core
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-        std::println("GLFW context created");
+        #if defined (__APPLE__)
+            glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE) // For MACOS
+        #endif
+        Print("GLFW context created");
     }
 
     GLContext::~GLContext() {
-        std::println("GL context shutdown");
+        Print("GL context shutdown");
     }
 
     void GLContext::Init(GLFWwindow* Handle) {
         glfwMakeContextCurrent(Handle);
+
         gladLoadGL(glfwGetProcAddress);
         glfwSetFramebufferSizeCallback(Handle, FrameBufferSizeCallback);
-        std::println("GL context created");
+        Print("GL context created");
     }
 
     void GLContext::ClearColor(float r, float g, float b, float a) {

@@ -1,8 +1,7 @@
-// SoPhIsTiCaTeD
-
 #pragma once
 
-#include <print>
+#include "Tools/Log.hpp"
+
 #include <GLFW/glfw3.h>
 
 namespace Engine {
@@ -10,15 +9,15 @@ namespace Engine {
         public:
             inline static void Init() {
                 if(!glfwInit()) {
-                    std::println("Error: Unable to initialize GLFW API");
+                    Print("Error: Unable to initialize GLFW API");
                 } else {
-                    std::println("GLFW API initialized");
+                    Print("GLFW API initialized");
                 }
             }
 
             inline static void Shutdown() {
                 glfwTerminate();
-                std::println("GLFW API shutdown");
+                Print("GLFW API shutdown");
             }
     };
 }

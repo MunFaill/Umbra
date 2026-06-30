@@ -1,8 +1,9 @@
 #pragma once
 
+#include "Tools/Log.hpp"
+
 #include <cstdint>
 #include <functional>
-#include <print>
 #include <unordered_map>
 
 namespace Engine {
@@ -16,7 +17,7 @@ namespace Engine {
             inline ListenerID AddListener(Callback callback) {
                 ListenerID listener = m_AvaliableListenerID++;
                 m_Callbacks.emplace(listener, callback);
-                std::println("New listener added: {}", listener);
+                Print("New listener added: {}", listener);
                 return listener;
             }
 
@@ -26,7 +27,7 @@ namespace Engine {
 
             inline bool RemoveListener(ListenerID listener)
             {
-                std::println("Listener removed: {}", listener);
+                Print("Listener removed: {}", listener);
                 return m_Callbacks.erase(listener) != 0;
             }
 
@@ -37,13 +38,13 @@ namespace Engine {
 
             inline void RemoveAllListeners()
             {
-                std::println("Listeners removed");
+                Print("Listeners removed");
                 m_Callbacks.clear();
             }
 
             inline uint64_t GetListenerCount()
             {
-                std::println("Number of listeners: {}", m_Callbacks.size());
+                Print("Number of listeners: {}", m_Callbacks.size());
                 return m_Callbacks.size();
             }
 
