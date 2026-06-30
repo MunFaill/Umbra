@@ -15,6 +15,8 @@ namespace Engine {
             virtual void Bind() = 0;
             virtual void Unbind() = 0;
 
+            virtual unsigned int GetIndexCount() = 0;
+
             static std::unique_ptr<Mesh> Create(std::unique_ptr<VertexBuffer> vertices, std::unique_ptr<IndexBuffer> indices);
     };
 }

@@ -5,11 +5,9 @@
 
 namespace Engine {
 
-    /*
-        Vertex Buffer
-    */
+    // Vertex Buffer
 
-    GLVertexBuffer::GLVertexBuffer(float Vertices[], unsigned int Size) {
+    GLVertexBuffer::GLVertexBuffer(float Vertices[], unsigned int Size) : m_Size(Size) {
         glGenBuffers(1, &m_VBO);
         glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
         glBufferData(GL_ARRAY_BUFFER, Size, Vertices, GL_STATIC_DRAW);
@@ -32,11 +30,13 @@ namespace Engine {
         Print("Vertex Buffer unbinded: {}", m_VBO);
     }
 
-    /*
-        Index Buffer
-    */
+    unsigned int GLVertexBuffer::GetSize() {
+        return m_Size;
+    }
 
-    GLIndexBuffer::GLIndexBuffer(unsigned int Indices[], unsigned int Count) {
+    // Index Buffer
+
+    GLIndexBuffer::GLIndexBuffer(unsigned int Indices[], unsigned int Count) : m_Count(Count) {
         glGenBuffers(1, &m_EBO);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, Count, Indices, GL_STATIC_DRAW);
@@ -59,9 +59,11 @@ namespace Engine {
         Print("Index Buffer unbinded: {}", m_EBO);
     }
 
-    /*
-        FRAME BUFFER
-    */
+    unsigned int GLIndexBuffer::GetCount() {
+        return  m_Count;
+    }
+
+    // Frame Buffer
 
     GLFrameBuffer::GLFrameBuffer() {
         glGenFramebuffers(1, &m_FBO);

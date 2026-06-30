@@ -10,6 +10,9 @@ namespace Engine {
 
             void Bind() override;
             void Unbind() override;
+
+            unsigned int GetIndexCount() override;
+
         private:
             std::unique_ptr<VertexBuffer> m_Vertices;
             std::unique_ptr<IndexBuffer> m_Indices;

@@ -11,8 +11,11 @@ namespace Engine {
             void Bind() override;
             void Unbind() override;
 
+            unsigned int GetSize() override;
+
         private:
             unsigned int m_VBO;
+            unsigned int m_Size;
     };
 
     class GLIndexBuffer : public IndexBuffer {
@@ -23,8 +26,11 @@ namespace Engine {
             void Bind() override;
             void Unbind() override;
 
+            unsigned int GetCount() override;
+
         private:
             unsigned int m_EBO;
+            unsigned int m_Count;
     };
 
     class GLFrameBuffer : public FrameBuffer {

@@ -43,4 +43,11 @@ namespace Engine {
         glBindVertexArray(0);
         Print("Mesh unbinded");
     }
+
+    unsigned int GLMesh::GetIndexCount() {
+        if (m_Indices) {
+            m_Indices->GetCount();
+        }
+        return 0;
+    }
 }

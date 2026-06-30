@@ -10,6 +10,8 @@ namespace Engine {
             virtual void Bind() = 0;
             virtual void Unbind() = 0;
 
+            virtual unsigned int GetSize() = 0;
+
             static std::unique_ptr<VertexBuffer> Create(float Vertices[], unsigned int Size);
     };  
 
@@ -19,6 +21,8 @@ namespace Engine {
 
             virtual void Bind() = 0;
             virtual void Unbind() = 0;
+
+            virtual unsigned int GetCount() = 0;
 
             static std::unique_ptr<IndexBuffer> Create(unsigned int Indices[], unsigned int Count);
     };

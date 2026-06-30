@@ -2,8 +2,6 @@
 
 #include "Renderer/RendererBuffers.hpp"
 #include "Renderer/RendererContext.hpp"
-#include "Renderer/RendererMesh.hpp"
-#include "Renderer/RendererShader.hpp"
 
 #include <glm/glm.hpp>
 #include <memory>
@@ -22,7 +20,5 @@ namespace Engine {
             inline static std::unique_ptr<RendererContext> m_Context;
             inline static std::unique_ptr<VertexBuffer> m_Vertex;
             inline static std::unique_ptr<IndexBuffer> m_Index;
-            inline static std::unique_ptr<Shader> m_Shader;
-            inline static std::unique_ptr<Mesh> m_Mesh;
     };
 }
