@@ -2,6 +2,7 @@
 
 #include "Renderer/RendererMesh.hpp"
 #include "Renderer/RendererShader.hpp"
+#include "Renderer/RendererTexture.hpp"
 
 #include <unordered_map>
 #include <memory>
@@ -66,6 +67,7 @@ namespace Engine {
     struct Assets {
         inline static AssetManager<Mesh> Meshes;
         inline static AssetManager<Shader> Shaders;
+        inline static AssetManager<Texture> Textures;
     };
 
 }

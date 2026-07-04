@@ -16,7 +16,7 @@ namespace Engine {
 
             virtual void Init(GLFWwindow* Handle) = 0;
             virtual void ClearColor(float r, float g, float b, float a) = 0;
-            virtual void DrawInstancied(unsigned int Size) = 0;
+            virtual void DrawIndexed(unsigned int Size) = 0;
             virtual void Clear() = 0;
 
             static GraphicsAPI GetGraphicsAPI();

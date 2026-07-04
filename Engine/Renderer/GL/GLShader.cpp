@@ -7,7 +7,7 @@
 #include <sstream>
 
 namespace Engine{
-    GLShader::GLShader(std::string VertexShaderPath, std::string FragmentShaderPath) {
+    GLShader::GLShader(const std::string& VertexShaderPath, const std::string& FragmentShaderPath) {
         m_VertexShader = glCreateShader(GL_VERTEX_SHADER);
         m_FragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 

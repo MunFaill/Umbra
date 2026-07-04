@@ -31,7 +31,12 @@ namespace Engine {
         glfwMakeContextCurrent(Handle);
 
         gladLoadGL(glfwGetProcAddress);
+
         glfwSetFramebufferSizeCallback(Handle, FrameBufferSizeCallback);
+
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Alpha func
+
         Print("GL context created");
     }
 
@@ -39,7 +44,7 @@ namespace Engine {
         glClearColor(r, g, b, a);
     }
 
-    void GLContext::DrawInstancied(unsigned int Size) {
+    void GLContext::DrawIndexed(unsigned int Size) {
         glDrawElements(GL_TRIANGLES, Size, GL_UNSIGNED_INT, 0);
     }
 

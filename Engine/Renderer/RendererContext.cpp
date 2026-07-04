@@ -2,11 +2,13 @@
 #include "Renderer/RendererBuffers.hpp"
 #include "Renderer/RendererShader.hpp"
 #include "Renderer/RendererMesh.hpp"
+#include "Renderer/RendererTexture.hpp"
 
 #include "Renderer/GL/GLContext.hpp"
 #include "Renderer/GL/GLBuffers.hpp"
 #include "Renderer/GL/GLShader.hpp"
 #include "Renderer/GL/GLMesh.hpp"
+#include "Renderer/GL/GLTexture.hpp"
 
 #include <memory>
 
@@ -70,7 +72,7 @@ namespace Engine {
     }
 
     // Shader
-    std::unique_ptr<Shader> Shader::Create(std::string VertexShaderPath, std::string FragmentShaderPath) {
+    std::unique_ptr<Shader> Shader::Create(const std::string& VertexShaderPath, const std::string& FragmentShaderPath) {
         switch (g_GraphicsAPI) {
             case GraphicsAPI::None:
                 return nullptr;
@@ -93,5 +95,18 @@ namespace Engine {
                 return nullptr;
         }
         return nullptr;
+    }
+
+    // Texture
+    std::unique_ptr<Texture> Texture::Create(const std::string& FilePath) {
+    	switch (g_GraphicsAPI) {
+    		case GraphicsAPI::None:
+    			return nullptr;
+    		case GraphicsAPI::OpenGL:
+    			return std::make_unique<GLTexture>(FilePath);
+    		case GraphicsAPI::Vulkan:
+    			return nullptr;
+    	}
+    	return nullptr;
     }
 }

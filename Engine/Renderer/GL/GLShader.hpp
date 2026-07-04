@@ -5,7 +5,7 @@
 namespace Engine {
     class GLShader : public Shader {
         public:
-            GLShader(std::string VertexShaderPath, std::string FragmentShaderPath);
+            GLShader(const std::string& VertexShaderPath, const std::string& FragmentShaderPath);
             ~GLShader() override;
 
             void Bind() override;
