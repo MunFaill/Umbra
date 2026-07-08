@@ -21,5 +21,9 @@ namespace Engine {
 
             static GraphicsAPI GetGraphicsAPI();
             static std::unique_ptr<RendererContext> Create();
+
+            static bool IsAPINone();
+            static bool IsAPIGL();
+            static bool IsAPIVK();
     };
 }

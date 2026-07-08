@@ -1,4 +1,4 @@
-#include "Renderer/GL/GLTexture.hpp"
+#include "Penumbra/GL/GLTexture.hpp"
 #include "Tools/Log.hpp"
 #include <cstddef>
 

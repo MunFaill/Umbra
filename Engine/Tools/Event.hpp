@@ -59,8 +59,6 @@ namespace Engine {
     };
     
     struct Events {
-        inline static Event<> OnInit;
-        inline static Event<float> OnUpdate;
         inline static Event<unsigned int, unsigned int> OnWindowResize;
     };
 }

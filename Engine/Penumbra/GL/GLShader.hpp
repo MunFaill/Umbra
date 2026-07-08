@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Renderer/RendererShader.hpp"
+#include "Penumbra/PShader.hpp"
 
 namespace Engine {
     class GLShader : public Shader {

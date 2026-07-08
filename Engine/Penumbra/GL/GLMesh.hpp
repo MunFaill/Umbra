@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Renderer/RendererMesh.hpp"
+#include "Penumbra/PMesh.hpp"
 
 namespace Engine {
     class GLMesh : public Mesh {

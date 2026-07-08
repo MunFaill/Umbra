@@ -1,5 +1,5 @@
-#include "Renderer/GL/GLMesh.hpp"
-#include "Renderer/RendererBuffers.hpp"
+#include "Penumbra/GL/GLMesh.hpp"
+#include "Penumbra/PBuffers.hpp"
 #include "Tools/Log.hpp"
 
 #include <glad/gl.h>

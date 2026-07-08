@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Renderer/RendererBuffers.hpp"
+#include "Penumbra/PBuffers.hpp"
 
 namespace Engine {
     class GLVertexBuffer : public VertexBuffer {

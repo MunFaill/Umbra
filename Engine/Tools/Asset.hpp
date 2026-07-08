@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Renderer/RendererMesh.hpp"
-#include "Renderer/RendererShader.hpp"
-#include "Renderer/RendererTexture.hpp"
+#include "Penumbra/PMesh.hpp"
+#include "Penumbra/PShader.hpp"
+#include "Penumbra/PTexture.hpp"
 
 #include <unordered_map>
 #include <memory>

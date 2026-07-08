@@ -1,14 +1,14 @@
-#include "Renderer/RendererContext.hpp"
-#include "Renderer/RendererBuffers.hpp"
-#include "Renderer/RendererShader.hpp"
-#include "Renderer/RendererMesh.hpp"
-#include "Renderer/RendererTexture.hpp"
+#include "Penumbra/PContext.hpp"
+#include "Penumbra/PBuffers.hpp"
+#include "Penumbra/PShader.hpp"
+#include "Penumbra/PMesh.hpp"
+#include "Penumbra/PTexture.hpp"
 
-#include "Renderer/GL/GLContext.hpp"
-#include "Renderer/GL/GLBuffers.hpp"
-#include "Renderer/GL/GLShader.hpp"
-#include "Renderer/GL/GLMesh.hpp"
-#include "Renderer/GL/GLTexture.hpp"
+#include "Penumbra/GL/GLContext.hpp"
+#include "Penumbra/GL/GLBuffers.hpp"
+#include "Penumbra/GL/GLShader.hpp"
+#include "Penumbra/GL/GLMesh.hpp"
+#include "Penumbra/GL/GLTexture.hpp"
 
 #include <memory>
 
@@ -17,6 +17,30 @@ namespace Engine {
 
     GraphicsAPI RendererContext::GetGraphicsAPI() {
         return g_GraphicsAPI;
+    }
+
+    bool RendererContext::IsAPINone() {
+        if (g_GraphicsAPI == GraphicsAPI::None) {
+            return true;
+        }
+
+        return false;
+    }
+
+    bool RendererContext::IsAPIGL() {
+        if (g_GraphicsAPI == GraphicsAPI::OpenGL) {
+            return true;
+        }
+
+        return false;
+    }
+
+    bool RendererContext::IsAPIVK() {
+        if (g_GraphicsAPI == GraphicsAPI::Vulkan) {
+            return true;
+        }
+
+        return false;
     }
 
     // Renderer Context

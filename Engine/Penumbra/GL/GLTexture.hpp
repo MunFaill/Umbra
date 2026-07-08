@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Renderer/RendererTexture.hpp"
+#include "Penumbra/PTexture.hpp"
 
 namespace Engine {
 	class GLTexture : public Texture {

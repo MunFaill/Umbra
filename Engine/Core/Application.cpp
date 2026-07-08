@@ -1,9 +1,8 @@
 #include "Core/Application.hpp"
 #include "Platform/WindowBackend.hpp"
 #include "Math/Time.hpp"
-#include "Tools/Event.hpp"
 #include "Tools/Log.hpp"
-#include "Renderer/Renderer.hpp"
+#include "Penumbra/PRenderer.hpp"
 
 namespace Engine {
     Application::Application() {
@@ -12,7 +11,6 @@ namespace Engine {
         WindowProps props = m_Window->GetProps();
         Renderer::Init(m_Window->GetHandle(), static_cast<float>(props.Width), static_cast<float>(props.Height));
         OnInit();
-        Events::OnInit.Invoke();
         Print("Application initialized");
     }
 
@@ -21,8 +19,6 @@ namespace Engine {
         Renderer::Shutdown();
         m_Window.reset();
         WindowBackend::Shutdown();
-        Events::OnInit.RemoveAllListeners();
-        Events::OnUpdate.RemoveAllListeners();
     }
 
     void Application::Run() {
@@ -30,7 +26,6 @@ namespace Engine {
         Print("Application running");
         while (!m_Window->ShouldClose()) {
             Time::CalculateTime();
-            Events::OnUpdate.Invoke(Time::DeltaTime);
             OnUpdate(Time::DeltaTime);
             Renderer::Draw();
             m_Window->HandleUpdate();

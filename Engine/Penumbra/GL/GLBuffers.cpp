@@ -1,4 +1,4 @@
-#include "Renderer/GL/GLBuffers.hpp"
+#include "Penumbra/GL/GLBuffers.hpp"
 #include "Tools/Log.hpp"
 
 #include <glad/gl.h>

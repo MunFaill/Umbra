@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Renderer/RendererBuffers.hpp"
-#include "Renderer/RendererContext.hpp"
+#include "Penumbra/PBuffers.hpp"
+#include "Penumbra/PContext.hpp"
 
 #include <glm/glm.hpp>
 #include <memory>

@@ -1,4 +1,4 @@
-#include "Renderer/GL/GLContext.hpp"
+#include "Penumbra/GL/GLContext.hpp"
 #include "Tools/Event.hpp"
 #include "Tools/Log.hpp"
 
