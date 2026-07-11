@@ -18,6 +18,6 @@ namespace Engine {
             virtual void SetVec3(const std::string& Name, const glm::vec3& Value) = 0;
             virtual void SetMat4(const std::string& Name, const glm::mat4& Value) = 0;
 
-            static std::unique_ptr<Shader> Create(const std::string& VertexShaderPath, const std::string& FragmentShaderPath);
+            static std::unique_ptr<Shader> Create(const std::string& ShaderPath);
     };
 }

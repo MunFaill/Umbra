@@ -3,9 +3,14 @@
 #include "Penumbra/PShader.hpp"
 
 namespace Engine {
+    struct ShaderSourceProgram {
+        std::string VertexSource;
+        std::string FragmentSource;
+    };
+
     class GLShader : public Shader {
         public:
-            GLShader(const std::string& VertexShaderPath, const std::string& FragmentShaderPath);
+            GLShader(const std::string& ShaderPath);
             ~GLShader() override;
 
             void Bind() override;
@@ -21,6 +26,6 @@ namespace Engine {
             unsigned int m_FragmentShader;
             unsigned int m_ShaderProgram;
 
-            std::string ReadFile(std::string FilePath);
+            ShaderSourceProgram ParseShader(const std::string& FilePath);
     };
 }

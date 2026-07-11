@@ -5,17 +5,17 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <fstream>
 #include <sstream>
+#include <string>
 
 namespace Engine{
-    GLShader::GLShader(const std::string& VertexShaderPath, const std::string& FragmentShaderPath) {
+    GLShader::GLShader(const std::string& ShaderPath) {
         m_VertexShader = glCreateShader(GL_VERTEX_SHADER);
         m_FragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 
-        std::string vertexCode = ReadFile(VertexShaderPath);
-        std::string fragmentCode = ReadFile(FragmentShaderPath);
+        ShaderSourceProgram sources = ParseShader(ShaderPath);
 
-        const char* vertexSource = vertexCode.c_str();
-        const char* fragmentSource = fragmentCode.c_str();
+        const char* vertexSource = sources.VertexSource.c_str();
+        const char* fragmentSource = sources.FragmentSource.c_str();
 
         glShaderSource(m_VertexShader, 1, &vertexSource, nullptr);
         glShaderSource(m_FragmentShader, 1, &fragmentSource, nullptr);
@@ -87,17 +87,49 @@ namespace Engine{
         glUniformMatrix4fv(glGetUniformLocation(m_ShaderProgram, Name.c_str()), 1, GL_FALSE, glm::value_ptr(Value));
     }
 
-    std::string GLShader::ReadFile(std::string FilePath) {
+    ShaderSourceProgram GLShader::ParseShader(const std::string& FilePath) {
         std::ifstream file(FilePath);
 
         if (!file.is_open()) {
             Print("Unable to open file: {}", FilePath);
+            return { "", "" };
         }
 
-        std::stringstream buffer;
-        buffer << file.rdbuf();
+        enum class ShaderType {
+            NONE = -1, VERTEX = 0, FRAGMENT = 1
+        };
 
-        Print("File readed successfully: {}", FilePath);
-        return buffer.str();
+        std::string line;
+        std::stringstream ss[2];
+        ShaderType type = ShaderType::NONE;
+        bool firstLineOfShader[2] = { true, true };
+
+        while (std::getline(file, line)) {
+            if (!line.empty() && line.back() == '\r') {
+                line.pop_back();
+            }
+
+            if (line.find("#shader") != std::string::npos) {
+                if (line.find("vertex") != std::string::npos) {
+                    type = ShaderType::VERTEX;
+                } else if (line.find("fragment") != std::string::npos) {
+                    type = ShaderType::FRAGMENT;
+                }
+            } else {
+                if (type != ShaderType::NONE) {
+                    int idx = static_cast<int>(type);
+                    
+                    if (firstLineOfShader[idx]) {
+                        ss[idx] << line;
+                        firstLineOfShader[idx] = false;
+                    } else {
+                        ss[idx] << '\n' << line;
+                    }
+                }
+            }
+        }
+
+        Print("File parsed successfully: {}", FilePath);
+        return { ss[0].str(), ss[1].str() };
     }
 }

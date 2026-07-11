@@ -13,7 +13,7 @@ namespace Engine {
 
     class Window {
         public:
-            Window(WindowProps props = {"Umbra", 1360, 769});
+            Window(WindowProps props = {"Umbra", 1024, 768});
             ~Window();
 
             void HandleUpdate();

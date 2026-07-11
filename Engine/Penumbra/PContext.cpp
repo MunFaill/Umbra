@@ -96,12 +96,12 @@ namespace Engine {
     }
 
     // Shader
-    std::unique_ptr<Shader> Shader::Create(const std::string& VertexShaderPath, const std::string& FragmentShaderPath) {
+    std::unique_ptr<Shader> Shader::Create(const std::string& ShaderPath) {
         switch (g_GraphicsAPI) {
             case GraphicsAPI::None:
                 return nullptr;
             case GraphicsAPI::OpenGL:
-                return std::make_unique<GLShader>(VertexShaderPath, FragmentShaderPath);
+                return std::make_unique<GLShader>(ShaderPath);
             case GraphicsAPI::Vulkan:
                 return nullptr;
         }
