@@ -1,6 +1,8 @@
 #include "Penumbra/PRenderer.hpp"
-#include "Tools/Asset.hpp"
+#include "Graphics/Camera.hpp"
 #include "Math/Common.hpp"
+#include "Tools/Asset.hpp"
+#include <memory>
 
 float g_Vertices[] = {
      -0.5f, 0.0f,  0.5f,    0.0f,  0.0f,
@@ -24,6 +26,8 @@ namespace Engine {
 
     void Renderer::Init(GLFWwindow* Handle, float Width, float Height) {
 
+        m_Camera = std::make_unique<Camera>(Width, Height, Vector3(0.0f, 0.0f, 2.0f));
+
         // Create a context object and give it the window handle pointer
         m_Context = RendererContext::Create();
         m_Context->Init(Handle);
@@ -32,29 +36,16 @@ namespace Engine {
         m_Vertex = VertexBuffer::Create(g_Vertices, sizeof(g_Vertices));
         m_Index = IndexBuffer::Create(g_Indices, sizeof(g_Indices));
 
-        // Projections, view coords and projection coords
-        Matrix4D model = Matrix4D(1.0f);
-        Matrix4D view = Matrix4D(1.0f);
-        Matrix4D projection = Matrix4D(1.0f);
-
-        view = Transform(view, Vector3(0.0f, -0.5f, -2.0f));
-        projection = glm::perspective(glm::radians(75.0f), (float)(Width / Height), 0.1f, 100.0f);
-
         // Create a shader and a mesh inside the asset map, and give it the data
         Assets::Shaders.Add("MainShader", Shader::Create("Engine/Assets/Base.shader"));
         Assets::Meshes.Add("Retangle", Mesh::Create(std::move(m_Vertex), std::move(m_Index)));
-
-        // Shader configuration stuff, bind, modify and unbind
-        Assets::Shaders.Get("MainShader").Bind();
-            Assets::Shaders.Get("MainShader").SetMat4("model", model);
-            Assets::Shaders.Get("MainShader").SetMat4("view", view);
-            Assets::Shaders.Get("MainShader").SetMat4("proj", projection);
-        Assets::Shaders.Get("MainShader").Unbind();
     }
 
     void Renderer::Draw() {
         Assets::Shaders.Get("MainShader").Bind();
         Assets::Meshes.Get("Retangle").Bind();
+
+        m_Camera->Matrix(45.0f, 0.1f, 100.0f, Assets::Shaders.Get("MainShader"), "camMatrix");
 
         m_Context->ClearColor(0.2f, 0.2f, 0.2f, 1.0f);
         m_Context->Clear();
@@ -64,10 +55,10 @@ namespace Engine {
         Assets::Shaders.Get("MainShader").Unbind();
     }
 
-
     void Renderer::Shutdown() {
         m_Context.reset();
         m_Vertex.reset();
         m_Index.reset();
+        m_Camera.reset();
     }
 }

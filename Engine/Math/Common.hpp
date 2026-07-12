@@ -1,12 +1,14 @@
 #pragma once
 
 #include <glm/glm.hpp>
+#include "glm/ext/matrix_clip_space.hpp"
 #include "glm/ext/matrix_float2x2.hpp"
 #include "glm/ext/matrix_float4x4.hpp"
 #include "glm/ext/matrix_transform.hpp"
 #include "glm/ext/vector_float2.hpp"
 #include "glm/ext/vector_float3.hpp"
 #include "glm/ext/vector_float4.hpp"
+#include "glm/trigonometric.hpp"
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/ext/matrix_transform.hpp>
 
@@ -18,6 +20,21 @@ typedef glm::vec2 Vector2;
 typedef glm::vec3 Vector3;
 typedef glm::vec4 Vector4;
 
-Matrix Transform(Matrix4D matrix, Vector3 Pos) {
+inline Vector3 Vector3UP = Vector3(0.0f, 1.0f, 0.0f);
+inline Vector3 Vector3Down = Vector3(0.0f, -1.0f, 0.0f);
+
+inline Matrix Transform(Matrix4D matrix, Vector3 Pos) {
     return glm::translate(matrix, Pos);
+}
+
+inline Matrix LookAt(Vector3 Eye, Vector3 Center, Vector3 UP) {
+    return glm::lookAt(Eye, Center, UP);
+}
+
+inline float DegToRadians(float Deg) {
+    return glm::radians(Deg);
+}
+
+inline Matrix Perspective(float Fovy, float AspectRatio, float Near, float Far) {
+    return glm::perspective(DegToRadians(Fovy), AspectRatio, Near, Far);
 }
