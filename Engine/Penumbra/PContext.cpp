@@ -57,7 +57,7 @@ namespace Engine {
     }
 
     // Vertex Buffer
-    std::unique_ptr<VertexBuffer> VertexBuffer::Create(float Vertices[], unsigned int Size) {
+    std::unique_ptr<VertexBuffer> VertexBuffer::Create(const void* Vertices, unsigned int Size) {
         switch (g_GraphicsAPI) {
             case GraphicsAPI::None:
                 return nullptr;

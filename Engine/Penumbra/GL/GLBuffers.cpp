@@ -7,7 +7,9 @@ namespace Engine {
 
     // Vertex Buffer
 
-    GLVertexBuffer::GLVertexBuffer(float Vertices[], unsigned int Size) : m_Size(Size) {
+    GLVertexBuffer::GLVertexBuffer(const void* Vertices, unsigned int Size) : m_Size(Size) {
+        SetLayout(Vertex::GetDefaultLayout());
+
         glGenBuffers(1, &m_VBO);
         glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
         glBufferData(GL_ARRAY_BUFFER, Size, Vertices, GL_STATIC_DRAW);
@@ -32,6 +34,14 @@ namespace Engine {
 
     unsigned int GLVertexBuffer::GetSize() {
         return m_Size;
+    }
+
+    void GLVertexBuffer::SetLayout(const BufferLayout& layout) {
+        m_Layout = layout;
+    }
+
+    const BufferLayout& GLVertexBuffer::GetLayout() const {
+        return m_Layout;
     }
 
     // Index Buffer
