@@ -33,7 +33,7 @@ project "Runtime"
 
     files {"Runtime/**.hpp", "Runtime/**.cpp"}
 
-    includedirs {"Engine/", "Vendor/glm"}
+    includedirs {"Engine/"}
 
     links {"Engine"}
     
