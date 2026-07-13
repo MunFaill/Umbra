@@ -38,3 +38,15 @@ inline float DegToRadians(float Deg) {
 inline Matrix Perspective(float Fovy, float AspectRatio, float Near, float Far) {
     return glm::perspective(DegToRadians(Fovy), AspectRatio, Near, Far);
 }
+
+inline Matrix4D Translate(const Matrix4D& matrix, const Vector3& translation) {
+    return glm::translate(matrix, translation);
+}
+
+inline Matrix4D Rotate(const Matrix4D& matrix, float angleInDegrees, const Vector3& axis) {
+    return glm::rotate(matrix, glm::radians(angleInDegrees), axis);
+}
+
+inline Matrix4D Scale(const Matrix4D& matrix, const Vector3& scale) {
+    return glm::scale(matrix, scale);
+}
