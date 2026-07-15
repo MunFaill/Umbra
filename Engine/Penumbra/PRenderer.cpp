@@ -79,6 +79,7 @@ namespace Engine {
         m_Index = IndexBuffer::Create(g_Indices, sizeof(g_Indices));
 
         Assets::Shaders.Add("MainShader", Shader::Create("Engine/Assets/Base.shader"));
+        Assets::Textures.Add("DebugTexture", Texture::Create("Engine/Assets/tex_DebugUVTiles.png"));
         Assets::Meshes.Add("Cube", Mesh::Create(std::move(m_Vertex), std::move(m_Index)));
     }
 
@@ -90,15 +91,17 @@ namespace Engine {
         m_Context->Clear();
 
         Assets::Shaders.Get("MainShader").Bind();
+        Assets::Textures.Get("DebugTexture").Bind();
         Assets::Meshes.Get("Cube").Bind();
 
+        Assets::Shaders.Get("MainShader").SetInt("u_Texture", 0);
         Assets::Shaders.Get("MainShader").SetMat4("projection", m_Camera->GetProjectionMatrix());
         Assets::Shaders.Get("MainShader").SetMat4("view", m_Camera->GetViewMatrix());
         Assets::Shaders.Get("MainShader").SetMat4("model", ModelMatrix);
 
         m_Camera->Matrix(45.0f, 0.1f, 100.0f, Assets::Shaders.Get("MainShader"), "camMatrix");
 
-        m_Context->DrawIndexed(sizeof(g_Indices) / sizeof(unsigned int));
+        m_Context->DrawIndexed(sizeof(g_Indices) / sizeof(unsigned int)); // DrawCall
 
         Assets::Meshes.Get("Cube").Unbind();
         Assets::Shaders.Get("MainShader").Unbind();

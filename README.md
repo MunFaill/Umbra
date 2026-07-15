@@ -2,6 +2,8 @@
 
 #### A toy engine/renderer ont it's early stages made in modern C++ and OpenGL 4.6 core;
 
+ - - -
+
 >[!WARNING]
 >I develop this project in my free time, updates aren't very frequent.
 
@@ -14,6 +16,13 @@
 - Premake -SUBMODULE;
 - GLM -SUBMODULE;
 - STB Image -INCLUDED.
+
+ - - -
+
+### Credits:
+[Debug Texture](https://github.com/BlueG/DebugTextures)
+
+ - - -
 
 It's juts a simple side-project;
 
@@ -33,6 +42,8 @@ You can execute it from root folder, like this:
 ./build/bin/Debug/Runtime
 ```
 or, you cant just execute the binary manually.
+
+ - - -
 
 ### Media:
 ![example](docs/ScreenShot.png)

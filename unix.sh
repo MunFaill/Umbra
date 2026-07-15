@@ -20,5 +20,5 @@ Vendor/premake-core/bin/release/premake5 ninja
 ninja -j$(nproc)
 
 #Pos build
-mkdir -p build/bin/Debug/Engine/Assets
-cp Engine/Assets/Base.shader build/bin/Debug/Engine/Assets/
+mkdir -p build/bin/Debug/Engine/
+cp -r Engine/Assets/ build/bin/Debug/Engine/
