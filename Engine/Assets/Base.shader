@@ -13,12 +13,13 @@ out vec3 v_FragPos;
 
 uniform mat4 projection;
 uniform mat4 view;
-uniform mat4 model; // Recebida do seu código C++
+uniform mat4 model;
 
 void main()
 {
     v_FragPos = vec3(model * vec4(a_Position, 1.0));
     v_Normal = mat3(transpose(inverse(model))) * a_Normal;
+    
     gl_Position = projection * view * model * vec4(a_Position, 1.0);
     
     v_Color = a_Color;
