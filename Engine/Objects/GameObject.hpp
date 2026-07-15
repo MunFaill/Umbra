@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Tools/Log.hpp"
+
 #include <string>
 #include <utility>
 #include <vector>
@@ -12,10 +14,13 @@ namespace Engine {
             GameObject* Parent;
             std::vector<std::unique_ptr<GameObject>> Childrens;
         public:
-            inline GameObject(const std::string& name = "Object") : Name(name) {}
+            inline GameObject(const std::string& name = "Object") : Name(name) {
+                Init();
+            }
+
             virtual ~GameObject() = default;
 
-            inline virtual void Init() {}
+            inline virtual void Init() { Print("Object initialized: ", this->GetName()); }
             inline virtual void Update(float DeltaTime) {
                 for (auto& child : Childrens) {
                     child->Update(DeltaTime);

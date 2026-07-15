@@ -1,15 +1,7 @@
 #pragma once
 
-#include <glm/ext/matrix_clip_space.hpp>
-#include <glm/ext/matrix_float2x2.hpp>
-#include <glm/ext/matrix_float4x4.hpp>
-#include <glm/ext/matrix_transform.hpp>
-#include <glm/ext/vector_float2.hpp>
-#include <glm/ext/vector_float3.hpp>
-#include <glm/ext/vector_float4.hpp>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include <glm/trigonometric.hpp>
 
 typedef glm::mat<4, 4, float, (glm::qualifier)0U> Matrix;
 typedef glm::mat2 Matrix2D;

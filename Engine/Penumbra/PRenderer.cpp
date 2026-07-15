@@ -2,7 +2,6 @@
 #include "Graphics/Camera.hpp"
 #include "Math/Common.hpp"
 #include "Math/Time.hpp"
-#include "Math/Transform.hpp"
 #include "Objects/GameObject.hpp"
 #include "Objects/Mesh3D.hpp"
 #include "Penumbra/PTexture.hpp"
@@ -78,22 +77,13 @@ namespace Engine {
         m_Context = RendererContext::Create();
         m_Context->Init(Handle);
 
-        uint32_t vertexBufferSize = g_Vertices.size() * sizeof(Engine::Vertex);
+        unsigned int vertexBufferSize = g_Vertices.size() * sizeof(Vertex);
         m_Vertex = VertexBuffer::Create(g_Vertices.data(), vertexBufferSize);
         m_Index = IndexBuffer::Create(g_Indices, sizeof(g_Indices));
 
         Assets::Shaders.Add("MainShader", Shader::Create("Engine/Assets/Base.shader"));
         Assets::Textures.Add("DebugTexture", Texture::Create("Engine/Assets/tex_DebugUVTiles.png"));
         Assets::Meshes.Add("Cube", Mesh::Create(std::move(m_Vertex), std::move(m_Index)));
-
-        std::unique_ptr<Mesh3D> Cube;
-        Cube = std::make_unique<Mesh3D>("MeshObj", "Cube", "DebugTexture", "MainShader");
-        AddGameObject(std::move(Cube));
-
-        std::unique_ptr<Mesh3D> Cube2;
-        Cube2 = std::make_unique<Mesh3D>("MeshObj", "Cube", "DebugTexture", "MainShader");
-        Cube2->transform.Position = Vector3(10.0f, 0.0f, 0.0f);
-        AddGameObject(std::move(Cube2));
     }
 
     void Renderer::Draw() {
@@ -108,7 +98,7 @@ namespace Engine {
 
         for (auto& obj : GameObjects) {
             obj->Update(Time::DeltaTime);
-            if (auto* meshOBJ = dynamic_cast<Mesh3D*>(obj.get())) { // Meshes
+            if (Mesh3D* meshOBJ = dynamic_cast<Mesh3D*>(obj.get())) { // Meshes
                 meshOBJ->Render(m_Context.get());
             }
         }

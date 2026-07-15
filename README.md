@@ -46,4 +46,5 @@ or, you cant just execute the binary manually.
  - - -
 
 ### Media:
-![example](docs/ScreenShot.png)
+![A cube with vertex color](docs/ScreenShot.png)
+![A cube with vertex color and texture](docs/ScreenShot2.png)

@@ -19,7 +19,17 @@ namespace Engine {
         std::erase(GameObjects, obj);
     }
 
+    inline GameObject* FindGameObject(const std::string& name) {
+        for (auto& obj : GameObjects) {
+            if (obj && obj->GetName() == name) {
+                return obj.get();
+            }
+        }
+        return nullptr;
+    }
+
     inline void ClearTree() {
         GameObjects.clear();
+        Print("Tree clear");
     }
 }

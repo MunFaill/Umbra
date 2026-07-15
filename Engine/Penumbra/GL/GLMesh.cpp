@@ -38,7 +38,7 @@ namespace Engine {
         const BufferLayout& layout = m_Vertices->GetLayout();
         unsigned int index = 0;
         
-        for (const auto& element : layout) {
+        for (const BufferElement& element : layout) {
             glEnableVertexAttribArray(index);
             glVertexAttribPointer(index, element.GetComponentCount(), ShaderDataTypeToOpenGLBaseType(element.Type), element.Normalized ? GL_TRUE : GL_FALSE, layout.GetStride(), (void*)element.Offset);
             index++;
