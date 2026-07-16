@@ -8,8 +8,7 @@ namespace Engine {
     Application::Application() {
         WindowBackend::Init();
         m_Window = std::make_unique<Window>();
-        WindowProps props = m_Window->GetProps();
-        Renderer::Init(m_Window->GetHandle(), static_cast<float>(props.Width), static_cast<float>(props.Height));
+        Renderer::Init(m_Window->GetHandle());
         OnInit();
         Print("Application initialized");
     }
@@ -27,7 +26,7 @@ namespace Engine {
         while (!m_Window->ShouldClose()) {
             Time::CalculateTime();
             OnUpdate(Time::DeltaTime);
-            Renderer::Draw();
+            Renderer::Draw(static_cast<float>(m_Window->GetProps().Width), static_cast<float>(m_Window->GetProps().Height));
             m_Window->HandleUpdate();
         }
     }

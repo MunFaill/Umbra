@@ -1,9 +1,5 @@
 #include "Penumbra/PRenderer.hpp"
-#include "Graphics/Camera.hpp"
-#include "Math/Common.hpp"
 #include "Math/Time.hpp"
-#include "Objects/GameObject.hpp"
-#include "Objects/Mesh3D.hpp"
 #include "Penumbra/PTexture.hpp"
 #include "Tools/Asset.hpp"
 #include "Objects/ObjectTree.hpp"
@@ -65,14 +61,8 @@ unsigned int g_Indices[] = {
     22, 23, 20
 };
 
-GLFWwindow* g_WindowHandle = nullptr;
-
 namespace Engine {
-    void Renderer::Init(GLFWwindow* Handle, float Width, float Height) {
-
-        g_WindowHandle = Handle;
-
-        m_Camera = std::make_unique<Camera>(Width, Height, Vector3(0.0f, 0.0f, 2.0f));
+    void Renderer::Init(GLFWwindow* Handle) {
 
         m_Context = RendererContext::Create();
         m_Context->Init(Handle);
@@ -86,18 +76,18 @@ namespace Engine {
         Assets::Meshes.Add("Cube", Mesh::Create(std::move(m_Vertex), std::move(m_Index)));
     }
 
-    void Renderer::Draw() {
-
-        m_Camera->Inputs(g_WindowHandle, Time::DeltaTime);
+    void Renderer::Draw(unsigned int Widht, unsigned int Height) {
 
         m_Context->ClearColor(0.2f, 0.2f, 0.2f, 1.0f);
         m_Context->Clear();
 
-        Assets::Shaders.Get("MainShader").SetMat4("projection", m_Camera->GetProjectionMatrix());
-        Assets::Shaders.Get("MainShader").SetMat4("view", m_Camera->GetViewMatrix());
-
         for (auto& obj : GameObjects) {
             obj->Update(Time::DeltaTime);
+
+            if (Camera3D* cameraOBJ = dynamic_cast<Camera3D*>(obj.get())) { // Cameras
+                cameraOBJ->Render("MainShader", Widht, Height);
+            }
+
             if (Mesh3D* meshOBJ = dynamic_cast<Mesh3D*>(obj.get())) { // Meshes
                 meshOBJ->Render(m_Context.get());
             }
@@ -108,7 +98,6 @@ namespace Engine {
         m_Context.reset();
         m_Vertex.reset();
         m_Index.reset();
-        m_Camera.reset();
         ClearTree();
     }
 

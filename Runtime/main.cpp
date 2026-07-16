@@ -1,9 +1,6 @@
-#include "Objects/Mesh3D.hpp"
-#include "Objects/ObjectTree.hpp"
 #include <Umbra.hpp>
 #include <memory>
-
-std::unique_ptr<Engine::Mesh3D> Cube;
+#include <utility>
 
 class Runtime : public Engine::Application {
     public:
@@ -16,6 +13,9 @@ class Runtime : public Engine::Application {
 
         void OnUpdate(float delta) override {
             // On scene update
+            if (Engine::Camera3D* camera = dynamic_cast<Engine::Camera3D*>(Engine::FindGameObject("MyCamera")))
+                camera->transform.Rotation.y += 90.0f * delta;
+
             if (Engine::Mesh3D* cube = dynamic_cast<Engine::Mesh3D*>(Engine::FindGameObject("MeshObj")))
                 cube->transform.Rotation.y += 90.0f * delta;
         }
@@ -23,8 +23,16 @@ class Runtime : public Engine::Application {
 
 int main() {
     Runtime* app = new Runtime();
-    Cube = std::make_unique<Engine::Mesh3D>("MeshObj", "Cube", "DebugTexture", "MainShader");
-    Engine::AddGameObject(std::move(Cube));
+
+    std::unique_ptr<Engine::Camera3D> cam;
+    cam = std::make_unique<Engine::Camera3D>("MyCamera", 75.0f, true);
+    cam->transform.Position = Vector3(0.0f, 0.0f, 2.0f);
+    Engine::AddGameObject(std::move(cam));
+
+    std::unique_ptr<Engine::Mesh3D> cube;
+    cube = std::make_unique<Engine::Mesh3D>("MeshObj", "Cube", "DebugTexture", "MainShader");
+    Engine::AddGameObject(std::move(cube));
+
     app->Run();
     delete app;
 }
