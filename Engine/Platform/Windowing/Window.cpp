@@ -1,4 +1,4 @@
-#include "Platform/Window.hpp"
+#include "Platform/Windowing/Window.hpp"
 #include "Tools/Event.hpp"
 #include "Tools/Log.hpp"
 
@@ -8,14 +8,14 @@ namespace Engine {
     Window::Window(WindowProps props) : m_WindowProps(props) {
         m_WindowHandle = glfwCreateWindow(props.Width, props.Height, props.WindowTitle.c_str(), nullptr, nullptr);
         if (!m_WindowHandle) {
-            Print("Unable to create a GLFW window!");
+            Print(Error, "Unable to create a GLFW window!");
         } else {
-            Print("Window initialized");
+            Print(Message,"Window initialized");
         }
     }
 
     Window::~Window() {
-        Print("Window shutdown");
+        Print(Warning, "Window shutdown");
         Events::OnWindowResize.RemoveAllListeners();
         glfwDestroyWindow(m_WindowHandle);
     }

@@ -51,22 +51,20 @@ namespace Engine {
             m_Indices->Unbind();
         }
 
-        Print("Mesh created successfully");
+        Print(Message, "Mesh created successfully");
     }
 
     GLMesh::~GLMesh() {
         glDeleteVertexArrays(1, &m_VAO);
-        Print("Mesh deleted");
+        Print(Warning, "Mesh deleted");
     }
 
     void GLMesh::Bind() {
         glBindVertexArray(m_VAO);
-        Print("Mesh binded");
     }
 
     void GLMesh::Unbind() {
         glBindVertexArray(0);
-        Print("Mesh unbinded");
     }
 
     unsigned int GLMesh::GetIndexCount() {

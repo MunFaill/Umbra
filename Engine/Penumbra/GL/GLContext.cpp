@@ -20,11 +20,11 @@ namespace Engine {
         #if defined (__APPLE__)
             glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE) // For MACOS
         #endif
-        Print("GLFW context created");
+        Print(Message, "GL context created");
     }
 
     GLContext::~GLContext() {
-        Print("GL context shutdown");
+        Print(Warning, "GL context shutdown");
     }
 
     void GLContext::Init(GLFWwindow* Handle) {
@@ -39,7 +39,7 @@ namespace Engine {
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Alpha func
 
-        Print("GL context created");
+        Print(Message, "GL context initialized");
     }
 
     void GLContext::ClearColor(float r, float g, float b, float a) {

@@ -14,22 +14,20 @@ namespace Engine {
         glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
         glBufferData(GL_ARRAY_BUFFER, Size, Vertices, GL_STATIC_DRAW);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
-        Print("Vertex Buffer created: {}", m_VBO);
+        Print(Message, "Vertex Buffer created: {}", m_VBO);
     };
 
     GLVertexBuffer::~GLVertexBuffer() {
         glDeleteBuffers(1, &m_VBO);
-        Print("Vertex Buffer deleted: {}", m_VBO);
+        Print(Warning, "Vertex Buffer deleted: {}", m_VBO);
     }
 
     void GLVertexBuffer::Bind() {
         glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-        Print("Vertex Buffer binded: {}", m_VBO);
     }
 
     void GLVertexBuffer::Unbind() {
         glBindBuffer(GL_ARRAY_BUFFER, 0);
-        Print("Vertex Buffer unbinded: {}", m_VBO);
     }
 
     unsigned int GLVertexBuffer::GetSize() {
@@ -51,22 +49,20 @@ namespace Engine {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, Count, Indices, GL_STATIC_DRAW);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-        Print("Index Buffer Created: {}", m_EBO);
+        Print(Message, "Index Buffer Created: {}", m_EBO);
     }
 
     GLIndexBuffer::~GLIndexBuffer() {
         glDeleteBuffers(1, &m_EBO);
-        Print("Index Buffer deleted: {}", m_EBO);
+        Print(Warning, "Index Buffer deleted: {}", m_EBO);
     }
 
     void GLIndexBuffer::Bind() {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
-        Print("Index Buffer binded: {}", m_EBO);
     }
 
     void GLIndexBuffer::Unbind() {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-        Print("Index Buffer unbinded: {}", m_EBO);
     }
 
     unsigned int GLIndexBuffer::GetCount() {
@@ -79,24 +75,22 @@ namespace Engine {
         glGenFramebuffers(1, &m_FBO);
         glBindFramebuffer(GL_FRAMEBUFFER, m_FBO);
         if(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE) {
-            Print("Frame buffer complete\n");
+            Print(Message, "Frame buffer complete");
         }
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
-        Print("Frame Buffer created: {}\n", m_FBO);
+        Print(Message, "Frame Buffer created: {}", m_FBO);
     }
 
     GLFrameBuffer::~GLFrameBuffer() {
         glDeleteFramebuffers(1, &m_FBO);
-        Print("Frame Buffer deleted: {}\n", m_FBO);
+        Print(Warning, "Frame Buffer deleted: {}", m_FBO);
     }
 
     void GLFrameBuffer::Bind() {
         glBindFramebuffer(GL_FRAMEBUFFER, m_FBO);
-        Print("Frame Buffer binded: {}\n", m_FBO);
     }
 
     void GLFrameBuffer::Unbind() {
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
-        Print("Frame Buffer unbinded: {}\n", m_FBO);
     }
 }

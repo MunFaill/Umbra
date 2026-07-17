@@ -28,22 +28,20 @@ namespace Engine {
 			stbi_image_free(m_LocalImageBuffer);
 		}
 
-		Print("Texture created with success", NULL);
+		Print(Message, "Texture created with success");
 	}
 
 	GLTexture::~GLTexture() {
-		Print("Texture deleted: ", m_TBO);
+		Print(Warning, "Texture deleted: {}", m_TBO);
 		glDeleteTextures(1, &m_TBO);
 	}
 
 	void GLTexture::Bind(unsigned int Slot) {
 		glActiveTexture(GL_TEXTURE0 + Slot);
 		glBindTexture(GL_TEXTURE_2D, m_TBO);
-		Print("Texture binded: ", m_TBO);
 	}
 
 	void GLTexture::Unbind() {
 		glBindTexture(GL_TEXTURE_2D, 0);
-		Print("Texture unbinded: ", m_TBO);
 	}
 }

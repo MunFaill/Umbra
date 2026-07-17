@@ -14,6 +14,8 @@ typedef glm::vec2 Vector2;
 typedef glm::vec3 Vector3;
 typedef glm::vec4 Vector4;
 
+#define PI = 3.14159265358979
+
 inline Vector3 Vector3UP = Vector3(0.0f, 1.0f, 0.0f);
 inline Vector3 Vector3Down = Vector3(0.0f, -1.0f, 0.0f);
 inline Vector3 Vector3Zero = Vector3(0.0f);

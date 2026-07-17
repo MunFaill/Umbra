@@ -30,13 +30,13 @@ namespace Engine{
         glGetShaderiv(m_VertexShader, GL_COMPILE_STATUS, &success);
         if (!success) {
             glGetShaderInfoLog(m_VertexShader, 512, nullptr, InfoLog);
-            Print("Error: Vertex shader compilation failed: {}", InfoLog);
+            Print(Error, "Vertex shader compilation failed: {}", InfoLog);
         }
 
         glGetShaderiv(m_FragmentShader, GL_COMPILE_STATUS, &success);
         if (!success) {
             glGetShaderInfoLog(m_FragmentShader, 512, nullptr, InfoLog);
-            Print("Error: Fragment shader compilation failed: {}", InfoLog);
+            Print(Error, "Fragment shader compilation failed: {}", InfoLog);
         }
 
         m_ShaderProgram = glCreateProgram();
@@ -47,10 +47,10 @@ namespace Engine{
         glGetProgramiv(m_ShaderProgram, GL_LINK_STATUS, &success);
         if (!success) {
             glGetProgramInfoLog(m_ShaderProgram, 512, nullptr, InfoLog);
-            Print("Error: Shader program couldn't link successfully");
+            Print(Error, "Shader program couldn't link successfully");
         }
 
-        Print("Shaders files compiled and linked");
+        Print(Message, "Shaders files compiled and linked");
     }
 
     GLShader::~GLShader() {
@@ -58,17 +58,15 @@ namespace Engine{
         glDeleteShader(m_VertexShader);
         glDeleteShader(m_FragmentShader);
 
-        Print("Shaders and Program deleted");
+        Print(Warning, "Shaders and Program deleted");
     }
 
     void GLShader::Bind() {
         glUseProgram(m_ShaderProgram);
-        Print("Shader program binded");
     }
 
     void GLShader::Unbind() {
         glUseProgram(0);
-        Print("Shader program unbinded");
     }
 
     void GLShader::SetInt(const std::string& Name, int Value) {
@@ -91,7 +89,7 @@ namespace Engine{
         std::ifstream file(FilePath);
 
         if (!file.is_open()) {
-            Print("Unable to open file: {}", FilePath);
+            Print(Warning, "Unable to open file: {}", FilePath);
             return { "", "" };
         }
 
@@ -129,7 +127,7 @@ namespace Engine{
             }
         }
 
-        Print("File parsed successfully: {}", FilePath);
+        Print(Message, "File parsed successfully: {}", FilePath);
         return { ss[0].str(), ss[1].str() };
     }
 }

@@ -1,20 +1,23 @@
 #pragma once
 
-#include "Platform/Window.hpp"
 #include <memory>
 
 namespace Engine {
+
+    // Forward declaration
+    class Window;
+
     class Application {
         public:
             Application();
             virtual ~Application();
 
+            inline virtual void OnInit() {}
+            inline virtual void OnUpdate(float DTime) {}
+            
             void Run();
-
-            virtual void OnInit();
-            virtual void OnUpdate(float delta);
-
         private:
+            bool m_IsRunning = true;
             std::unique_ptr<Window> m_Window;
     };
 }

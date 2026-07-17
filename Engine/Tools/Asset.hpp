@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Tools/Log.hpp"
+
 #include "Penumbra/PMesh.hpp"
 #include "Penumbra/PShader.hpp"
 #include "Penumbra/PTexture.hpp"
@@ -19,20 +21,6 @@ namespace Engine {
             AssetManager(const AssetManager&) = delete;
             AssetManager& operator=(const AssetManager&) = delete;
 
-            template <typename... Args>
-            T& Load(const std::string ID, Args&&... args) {
-                auto It = m_Assets.find(ID);
-                if (It != m_Assets.end()) {
-                    return *(It->second);
-                }
-
-                auto Asset = std::make_unique<T>(std::forward<Args>(args)...);
-                auto& AssetRef = *Asset;
-
-                m_Assets[ID] = std::move(Asset);
-                return AssetRef;
-            }
-
             T& Add(const std::string& ID, std::unique_ptr<T> asset) {
                 auto It = m_Assets.find(ID);
                 if (It != m_Assets.end()) {
@@ -40,6 +28,9 @@ namespace Engine {
                 }
 
                 m_Assets[ID] = std::move(asset);
+
+                Print(Message, "New asset added: {}", ID);
+
                 return *(m_Assets[ID]);
             }
 
@@ -54,6 +45,8 @@ namespace Engine {
                 if (It != m_Assets.end()) {
                     m_Assets.erase(It);
                 }
+
+                Print(Message, "Asset unloaded: {}", ID);
             }
 
             void UnloadAll() {

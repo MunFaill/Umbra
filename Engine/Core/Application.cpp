@@ -1,36 +1,55 @@
 #include "Core/Application.hpp"
-#include "Platform/WindowBackend.hpp"
-#include "Math/Time.hpp"
+
+#include "Platform/Windowing/WindowBackend.hpp"
+#include "Platform/Windowing/Window.hpp"
+
+#include "Objects/ObjectTree.hpp"
+
 #include "Tools/Log.hpp"
+
+#include "Math/Time.hpp"
+
 #include "Penumbra/PRenderer.hpp"
 
 namespace Engine {
     Application::Application() {
-        WindowBackend::Init();
+        // Init everthing
+        Print(Message, "Application initialized");
+
+        Time::InitTime();
+        WindowBackend::Initialize();
         m_Window = std::make_unique<Window>();
         Renderer::Init(m_Window->GetHandle());
-        OnInit();
-        Print("Application initialized");
     }
 
     Application::~Application() {
-        Print("Application shutdown");
-        Renderer::Shutdown();
-        m_Window.reset();
+        Print(Warning, "Application shutdown and delete");
+        // Shutdown everthing
         WindowBackend::Shutdown();
+        m_Window.reset();
+        Renderer::Shutdown();
     }
 
     void Application::Run() {
-        Time::InitTime();
-        Print("Application running");
-        while (!m_Window->ShouldClose()) {
+        Print(Message, "Application running");
+        OnInit();
+        while (m_IsRunning) {
+
             Time::CalculateTime();
-            OnUpdate(Time::DeltaTime);
-            Renderer::Draw(static_cast<float>(m_Window->GetProps().Width), static_cast<float>(m_Window->GetProps().Height));
+
+            if (m_Window->ShouldClose()) {
+                m_IsRunning = false;
+            }
+
             m_Window->HandleUpdate();
+
+            Renderer::Draw(m_Window->GetProps().Width, m_Window->GetProps().Height);
+
+            for (auto& obj : GameObjects) {
+                obj->Update(Time::DeltaTime);
+            }
+
+            OnUpdate(Time::DeltaTime); // Needs to be the last one called
         }
     }
-
-    void Application::OnInit() {}
-    void Application::OnUpdate(float dt) {}
 }

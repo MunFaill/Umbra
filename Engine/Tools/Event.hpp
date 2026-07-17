@@ -17,7 +17,7 @@ namespace Engine {
             inline ListenerID AddListener(Callback callback) {
                 ListenerID listener = m_AvaliableListenerID++;
                 m_Callbacks.emplace(listener, callback);
-                Print("New listener added: {}", listener);
+                Print(Message, "New listener added: {}", listener);
                 return listener;
             }
 
@@ -27,7 +27,7 @@ namespace Engine {
 
             inline bool RemoveListener(ListenerID listener)
             {
-                Print("Listener removed: {}", listener);
+                Print(Warning, "Listener removed: {}", listener);
                 return m_Callbacks.erase(listener) != 0;
             }
 
@@ -38,13 +38,13 @@ namespace Engine {
 
             inline void RemoveAllListeners()
             {
-                Print("Listeners removed");
+                Print(Warning, "Listeners removed");
                 m_Callbacks.clear();
             }
 
             inline uint64_t GetListenerCount()
             {
-                Print("Number of listeners: {}", m_Callbacks.size());
+                Print(Message, "Number of listeners: {}", m_Callbacks.size());
                 return m_Callbacks.size();
             }
 

@@ -14,13 +14,11 @@ namespace Engine {
             GameObject* Parent;
             std::vector<std::unique_ptr<GameObject>> Childrens;
         public:
-            inline GameObject(const std::string& name = "Object") : Name(name) {
-                Init();
-            }
+            inline GameObject(const std::string& name = "Object") : Name(name) {}
 
             virtual ~GameObject() = default;
 
-            inline virtual void Init() { Print("Object initialized: ", this->GetName()); }
+            inline virtual void Init() { Print(Message, "Object initialized: {}", this->GetName()); }
             inline virtual void Update(float DeltaTime) {
                 for (auto& child : Childrens) {
                     child->Update(DeltaTime);
@@ -29,6 +27,7 @@ namespace Engine {
 
             inline void AddChild(std::unique_ptr<GameObject> child) {
                 child->Parent = this;
+                child->Init();
                 Childrens.push_back(std::move(child));
             }
 

@@ -82,7 +82,6 @@ namespace Engine {
         m_Context->Clear();
 
         for (auto& obj : GameObjects) {
-            obj->Update(Time::DeltaTime);
 
             if (Camera3D* cameraOBJ = dynamic_cast<Camera3D*>(obj.get())) { // Cameras
                 cameraOBJ->Render("MainShader", Widht, Height);
