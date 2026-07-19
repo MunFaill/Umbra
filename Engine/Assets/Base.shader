@@ -36,12 +36,20 @@ in vec2 v_TexCoord;
 in vec3 v_Normal;
 in vec3 v_FragPos;
 
-uniform sampler2D u_Texture;
+struct Material {
+    vec4 ALBEDO;
+    float Specular;
+    int Shininess;
+    sampler2D TEXTURE;
+};
+
+uniform Material material;
+
+uniform vec3 ViewPos;
 
 void main()
 {   
-
-    vec4 texColor = texture(u_Texture, v_TexCoord);
+    vec4 texColor = texture(material.TEXTURE, v_TexCoord);
 
     vec3 lightPos = vec3(5.0, 5.0, 5.0);
 
@@ -54,7 +62,13 @@ void main()
     float diff = max(dot(norm, lightDir), 0.0);
     vec3 diffuse = diff * LightColor;
 
-    vec3 result = (ambient + diffuse) * v_Color.xyz;
+    vec3 viewDir = normalize(ViewPos - v_FragPos);
+    vec3 reflectDir = reflect(-lightDir, norm);
+    
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), float(material.Shininess));
 
+    vec3 specular = material.Specular * spec * LightColor; 
+
+    vec3 result = (ambient + diffuse + specular) * material.ALBEDO.xyz;
     FragColor = vec4(result, 1.0) * texColor;
 }

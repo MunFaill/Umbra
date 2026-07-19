@@ -81,6 +81,10 @@ namespace Engine{
         glUniform3fv(glGetUniformLocation(m_ShaderProgram, Name.c_str()), 1, glm::value_ptr(Value));
     }
 
+    void GLShader::SetVec4(const std::string& Name, const Vector4& Value) {
+        glUniform4fv(glGetUniformLocation(m_ShaderProgram, Name.c_str()), 1, glm::value_ptr(Value));
+    }
+
     void GLShader::SetMat4(const std::string& Name, const glm::mat4& Value) {
         glUniformMatrix4fv(glGetUniformLocation(m_ShaderProgram, Name.c_str()), 1, GL_FALSE, glm::value_ptr(Value));
     }

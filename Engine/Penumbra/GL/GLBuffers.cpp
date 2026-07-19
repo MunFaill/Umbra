@@ -47,7 +47,7 @@ namespace Engine {
     GLIndexBuffer::GLIndexBuffer(unsigned int Indices[], unsigned int Count) : m_Count(Count) {
         glGenBuffers(1, &m_EBO);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, Count, Indices, GL_STATIC_DRAW);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, Count * sizeof(unsigned int), Indices, GL_STATIC_DRAW);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
         Print(Message, "Index Buffer Created: {}", m_EBO);
     }

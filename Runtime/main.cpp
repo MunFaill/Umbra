@@ -9,23 +9,41 @@ class Runtime : public Engine::Application {
 
         void OnInit() override {
             // On scene init
+
+            // Create and add a shader to assets
+            Engine::Assets::Shaders.Add("MainShader", Engine::Shader::Create("Engine/Assets/Base.shader"));
+
+            // Texture
+            Engine::Assets::Textures.Add("DebugTexture", Engine::Texture::Create("Engine/Assets/tex_DebugUVTiles.png"));
+
+            // Material with basic data
+            Engine::Assets::Materials.Add("MyMaterial", std::make_unique<Engine::Material>());
+
+            // Model
+            std::unique_ptr<Engine::Model> model = std::make_unique<Engine::Model>();
+            model->LoadMeshFromFile("Engine/Assets/lampshade.obj");
+            model->SetMaterial("MyMaterial");
+            Engine::Assets::Models.Add("Model", std::move(model));
+
+            // Game Objects: Camera3D
             std::unique_ptr<Engine::Camera3D> cam;
             cam = std::make_unique<Engine::Camera3D>("MyCamera", 75.0f, true);
-            cam->transform.Position = Vector3(0.0f, 0.0f, 2.0f);
+            cam->transform.Position = Vector3(0.0f, 2.5f, 10.0f);
             Engine::AddGameObject(std::move(cam));
 
-            std::unique_ptr<Engine::Mesh3D> cube;
-            cube = std::make_unique<Engine::Mesh3D>("MeshObj", "Cube", "DebugTexture", "MainShader");
-            Engine::AddGameObject(std::move(cube));
+            // Model3D
+            std::unique_ptr<Engine::Model3D> MyModel;
+            MyModel = std::make_unique<Engine::Model3D>("MyModel", "Model", "MainShader");
+            Engine::AddGameObject(std::move(MyModel));
         }
 
         void OnUpdate(float delta) override {
             // On scene update
-            if (Engine::Camera3D* camera = dynamic_cast<Engine::Camera3D*>(Engine::FindGameObject("MyCamera")))
-                camera->transform.Rotation.y += 90.0f * delta;
-
-            if (Engine::Mesh3D* cube = dynamic_cast<Engine::Mesh3D*>(Engine::FindGameObject("MeshObj")))
-                cube->transform.Rotation.y += 90.0f * delta;
+            if (Engine::Model3D* model = dynamic_cast<Engine::Model3D*>(Engine::FindGameObject("MyModel"))) {
+                model->transform.Rotation.x += 90.0f * delta;
+                model->transform.Rotation.y += 90.0f * delta;
+                model->transform.Rotation.z += 90.0f * delta;
+            }
         }
 };
 

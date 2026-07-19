@@ -16,6 +16,7 @@
 - Premake -SUBMODULE;
 - GLM -SUBMODULE;
 - STB Image -INCLUDED.
+- Tiny Obj Loader -INCLUDED.
 
  - - -
 

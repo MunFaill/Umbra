@@ -5,6 +5,7 @@
 #include "Objects/GameObject.hpp"
 #include "Objects/Object3D.hpp"
 #include "Objects/Mesh3D.hpp"
+#include "Objects/Model3D.hpp"
 #include "Objects/Camera3D.hpp"
 
 #include <utility>

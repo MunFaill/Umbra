@@ -33,6 +33,7 @@ namespace Engine {
 					Matrix4D view = LookAt(transform.Position, transform.Position + orientation, Up);
 					Matrix4D projection = Perspective(Fovy, (float)Width / Height, Near, Far);
 
+					shader.SetVec3("ViewPos", transform.Position);
 					shader.SetMat4("view", view);
 					shader.SetMat4("projection", projection);
 					}

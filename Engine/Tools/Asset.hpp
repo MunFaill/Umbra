@@ -5,6 +5,8 @@
 #include "Penumbra/PMesh.hpp"
 #include "Penumbra/PShader.hpp"
 #include "Penumbra/PTexture.hpp"
+#include "Penumbra/PMaterial.hpp"
+#include "Penumbra/PModel.hpp"
 
 #include <unordered_map>
 #include <memory>
@@ -61,6 +63,8 @@ namespace Engine {
         inline static AssetManager<Mesh> Meshes;
         inline static AssetManager<Shader> Shaders;
         inline static AssetManager<Texture> Textures;
+        inline static AssetManager<Material> Materials;
+        inline static AssetManager<Model> Models;
     };
 
 }
