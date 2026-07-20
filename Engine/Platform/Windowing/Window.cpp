@@ -23,6 +23,12 @@ namespace Engine {
     void Window::HandleUpdate() {
         glfwSwapBuffers(m_WindowHandle);
         glfwPollEvents();
+
+        int Width, Height;
+        glfwGetFramebufferSize(m_WindowHandle, &Width, &Height);
+
+        m_WindowProps.Width = static_cast<unsigned int>(Width);
+        m_WindowProps.Height = static_cast<unsigned int>(Height);
     }
 
     bool Window::ShouldClose() {

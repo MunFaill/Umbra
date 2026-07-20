@@ -16,13 +16,14 @@ namespace Engine {
         m_Context->ClearColor(0.2f, 0.2f, 0.2f, 1.0f);
         m_Context->Clear();
 
-        for (auto& obj : GameObjects) {
-
-            if (Camera3D* cameraOBJ = dynamic_cast<Camera3D*>(obj.get())) { // Cameras
+        for (auto& obj : GameObjects) { // Cameras
+            if (Camera3D* cameraOBJ = dynamic_cast<Camera3D*>(obj.get())) {
                 cameraOBJ->Render("MainShader", Widht, Height);
             }
+        }
 
-            if (Mesh3D* meshOBJ = dynamic_cast<Mesh3D*>(obj.get())) { // Meshes
+        for (auto& obj : GameObjects) { // Drawable
+            if (Mesh3D* meshOBJ = dynamic_cast<Mesh3D*>(obj.get())) {
                 meshOBJ->Render(m_Context.get());
             }
 

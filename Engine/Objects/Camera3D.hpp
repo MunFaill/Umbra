@@ -30,8 +30,10 @@ namespace Engine {
 					direction.z = sin(DegToRadians(yaw)) * cos(DegToRadians(pitch));
 					Vector3 orientation = Normalize(direction);
 
+					float aspectRatio = Height > 0 ? (float)Width / (float)Height : 1.0f;
+
 					Matrix4D view = LookAt(transform.Position, transform.Position + orientation, Up);
-					Matrix4D projection = Perspective(Fovy, (float)Width / Height, Near, Far);
+					Matrix4D projection = Perspective(Fovy, aspectRatio, Near, Far);
 
 					shader.SetVec3("ViewPos", transform.Position);
 					shader.SetMat4("view", view);
