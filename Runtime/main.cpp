@@ -1,3 +1,4 @@
+#include "Math/Common.hpp"
 #include <Umbra.hpp>
 #include <memory>
 #include <utility>
@@ -14,7 +15,7 @@ class Runtime : public Engine::Application {
             Engine::Assets::Shaders.Add("MainShader", Engine::Shader::Create("Engine/Assets/Base.shader"));
 
             // Texture
-            Engine::Assets::Textures.Add("DebugTexture", Engine::Texture::Create("Engine/Assets/tex_DebugUVTiles.png"));
+            Engine::Assets::Textures.Add("DefaultTexture", Engine::Texture::Create("Engine/Assets/default.png"));
 
             // Material with basic data
             Engine::Assets::Materials.Add("MyMaterial", std::make_unique<Engine::Material>());
@@ -28,7 +29,7 @@ class Runtime : public Engine::Application {
             // Game Objects: Camera3D
             std::unique_ptr<Engine::Camera3D> cam;
             cam = std::make_unique<Engine::Camera3D>("MyCamera", 75.0f, true);
-            cam->transform.Position = Vector3(0.0f, 2.5f, 10.0f);
+            cam->transform.Position = Vector3(0.0f, 0.5f, 10.0f);
             Engine::AddGameObject(std::move(cam));
 
             // Model3D
@@ -40,9 +41,7 @@ class Runtime : public Engine::Application {
         void OnUpdate(float delta) override {
             // On scene update
             if (Engine::Model3D* model = dynamic_cast<Engine::Model3D*>(Engine::FindGameObject("MyModel"))) {
-                model->transform.Rotation.x += 90.0f * delta;
-                model->transform.Rotation.y += 90.0f * delta;
-                model->transform.Rotation.z += 90.0f * delta;
+                model->transform.Rotation.z += -90.0f * delta;
             }
         }
 };

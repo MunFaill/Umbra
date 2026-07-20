@@ -51,7 +51,7 @@ void main()
 {   
     vec4 texColor = texture(material.TEXTURE, v_TexCoord);
 
-    vec3 lightPos = vec3(5.0, 5.0, 5.0);
+    vec3 lightPos = vec3(5.0, 0.5, 5.0);
 
     vec3 LightColor = vec3(1.0);
     float AmbientStrenght = 0.1;
