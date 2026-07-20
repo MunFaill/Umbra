@@ -1,7 +1,5 @@
-#include "Math/Common.hpp"
 #include <Umbra.hpp>
-#include <memory>
-#include <utility>
+#include "FlyCamera.hpp"
 
 class Runtime : public Engine::Application {
     public:
@@ -27,8 +25,8 @@ class Runtime : public Engine::Application {
             Engine::Assets::Models.Add("Model", std::move(model));
 
             // Game Objects: Camera3D
-            std::unique_ptr<Engine::Camera3D> cam;
-            cam = std::make_unique<Engine::Camera3D>("MyCamera", 75.0f, true);
+            std::unique_ptr<FlyCamera> cam;
+            cam = std::make_unique<FlyCamera>("MyCamera", 75.0f, true);
             cam->transform.Position = Vector3(0.0f, 0.5f, 10.0f);
             Engine::AddGameObject(std::move(cam));
 
@@ -40,9 +38,7 @@ class Runtime : public Engine::Application {
 
         void OnUpdate(float delta) override {
             // On scene update
-            if (Engine::Model3D* model = dynamic_cast<Engine::Model3D*>(Engine::FindGameObject("MyModel"))) {
-                model->transform.Rotation.z += -90.0f * delta;
-            }
+
         }
 };
 

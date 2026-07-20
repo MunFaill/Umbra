@@ -11,6 +11,8 @@
 
 #include "Penumbra/PRenderer.hpp"
 
+#include "Platform/IO/Input.hpp"
+
 namespace Engine {
     Application::Application() {
         // Init everthing
@@ -20,6 +22,8 @@ namespace Engine {
         WindowBackend::Initialize();
         m_Window = std::make_unique<Window>();
         Renderer::Init(m_Window->GetHandle());
+
+        CurrentInputContext = m_Window->GetHandle();
     }
 
     Application::~Application() {

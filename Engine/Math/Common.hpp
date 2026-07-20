@@ -32,6 +32,8 @@ inline float DegToRadians(float Deg) { return glm::radians(Deg); }
 
 inline Vector Normalize(Vector x) { return glm::normalize(x); }
 
+inline Vector Cross(Vector x, Vector y) { return glm::cross(x, y);}
+
 inline Matrix Perspective(float Fovy, float AspectRatio, float Near, float Far) {
   return glm::perspective(DegToRadians(Fovy), AspectRatio, Near, Far);
 }

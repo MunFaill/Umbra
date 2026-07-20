@@ -11,6 +11,8 @@ namespace Engine {
         unsigned int Width, Height;
     };
 
+    inline WindowProps* CurrentWindowProp;
+
     class Window {
         public:
             Window(WindowProps props = {"Umbra", 1024, 768});

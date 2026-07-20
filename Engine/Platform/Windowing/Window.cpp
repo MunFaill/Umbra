@@ -12,6 +12,8 @@ namespace Engine {
         } else {
             Print(Message,"Window initialized");
         }
+
+        CurrentWindowProp = &m_WindowProps;
     }
 
     Window::~Window() {
